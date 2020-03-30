@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MechanicMotorsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Almacen">
+          <Key>
+            <PropertyRef Name="IdPieza" />
+          </Key>
+          <Property Name="IdPieza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombrePieza" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="VehiculoPerteneciente" Type="varchar" MaxLength="150" />
+          <Property Name="Color" Type="varchar" MaxLength="150" />
+          <Property Name="PrecioUnitario" Type="float" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reparaciones">
+          <Key>
+            <PropertyRef Name="IdReparacion" />
+          </Key>
+          <Property Name="IdReparacion" Type="int" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Vehiculo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescripcionProblema" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HoraEntrada" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MechanicMotorsModelStoreContainer">
+          <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MechanicMotorsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Almacen">
+          <Key>
+            <PropertyRef Name="IdPieza" />
+          </Key>
+          <Property Name="IdPieza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombrePieza" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VehiculoPerteneciente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioUnitario" Type="Double" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reparacion">
+          <Key>
+            <PropertyRef Name="IdReparacion" />
+          </Key>
+          <Property Name="IdReparacion" Type="Int32" Nullable="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vehiculo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescripcionProblema" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoraEntrada" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="MechanicMotorsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Almacen" EntityType="Self.Almacen" />
+          <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities">
+          <EntitySetMapping Name="Almacen">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Almacen">
+              <MappingFragment StoreEntitySet="Almacen">
+                <ScalarProperty Name="IdPieza" ColumnName="IdPieza" />
+                <ScalarProperty Name="NombrePieza" ColumnName="NombrePieza" />
+                <ScalarProperty Name="VehiculoPerteneciente" ColumnName="VehiculoPerteneciente" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparaciones">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Reparacion">
+              <MappingFragment StoreEntitySet="Reparaciones">
+                <ScalarProperty Name="IdReparacion" ColumnName="IdReparacion" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="TelefonoCliente" ColumnName="TelefonoCliente" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
+                <ScalarProperty Name="DescripcionProblema" ColumnName="DescripcionProblema" />
+                <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
