@@ -90,7 +90,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10" HorizontalAlignment="Left">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10" HorizontalAlignment="Left" Click="Button_Click">
                             <Image Source="/Resources/Suma.png"/>
                         </Button>
                     </StackPanel>

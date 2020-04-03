@@ -45,5 +45,13 @@ namespace Mechanic_Motors.Vista
         {
             HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NuevaReparacionWindow nuevaReparacionWindow = new NuevaReparacionWindow();
+            nuevaReparacionWindow.Owner = this;
+            nuevaReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            nuevaReparacionWindow.Show();
+        }
     }
 }

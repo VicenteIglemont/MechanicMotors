@@ -103,9 +103,19 @@
     </Compile>
     <Compile Include="ServiciosBD\BDServicios.cs" />
     <Compile Include="VistaModelo\MenuPrincipalViewModel.cs" />
+    <Compile Include="Vista\FormularioReparacion.xaml.cs">
+      <DependentUpon>FormularioReparacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vista\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vista\NuevaReparacionWindow.xaml.cs">
+      <DependentUpon>NuevaReparacionWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Vista\FormularioReparacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vista\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +129,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Vista\MenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\NuevaReparacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

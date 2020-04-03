@@ -17,7 +17,7 @@
 
     <DockPanel LastChildFill="True">
 
-        <TextBlock Text="Mechanic Motors" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="Bold" Margin="25"/>
+        <TextBlock Text="Mechanic Motors" DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="72" FontWeight="Bold" Margin="25"/>
 
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
             <StackPanel DockPanel.Dock="Bottom" Margin="10">
