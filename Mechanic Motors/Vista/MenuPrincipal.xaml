@@ -14,6 +14,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Mechanic MotorS" Height="1080" Width="1920" WindowState="Maximized" WindowStyle="None" Topmost="True">
+    
+    <!--Prueba-->
 
     <Window.CommandBindings>
         <CommandBinding
