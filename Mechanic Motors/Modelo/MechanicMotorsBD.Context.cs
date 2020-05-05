@@ -13,10 +13,10 @@ namespace Mechanic_Motors.Modelo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MechanicMotorsEntities : DbContext
+    public partial class MechanicMotorsEntity : DbContext
     {
-        public MechanicMotorsEntities()
-            : base("name=MechanicMotorsEntities")
+        public MechanicMotorsEntity()
+            : base("name=MechanicMotorsEntity")
         {
         }
     
@@ -25,7 +25,7 @@ namespace Mechanic_Motors.Modelo
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Almacen> Almacen { get; set; }
+        public virtual DbSet<Pieza> Almacen { get; set; }
         public virtual DbSet<Reparacion> Reparaciones { get; set; }
     }
 }

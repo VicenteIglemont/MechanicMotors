@@ -1,0 +1,48 @@
+﻿<Window x:Class="Mechanic_Motors.Vista.CancelarReparacionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mechanic_Motors.Vista"
+        mc:Ignorable="d"
+        Title="Cancelar Reparacion" Height="350" Width="600" WindowStyle="None">
+    
+    <StackPanel>
+
+        <TextBlock Text="¿Quieres cancelar la siguiente reparación?" Margin="0,30,0,0" HorizontalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <StackPanel Margin="10">
+                <TextBlock Text="Id Reparacion"/>
+                <TextBlock Text="Nombre cliente"/>
+                <TextBlock Text="Email cliente"/>
+                <TextBlock Text="Telefono cliente"/>
+                <TextBlock Text="Vehiculo"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock x:Name="IdClienteTextBlock"/>
+                <TextBlock x:Name="NombreClienteTextBlock"/>
+                <TextBlock x:Name="EmailClienteTextBlock"/>
+                <TextBlock x:Name="TelefonoClienteTextBlock"/>
+                <TextBlock x:Name="VehiculoTextBlock"/>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Text="Problema" Margin="10, 0"/>
+        <TextBox x:Name="ProblemaTextBox" IsReadOnly="True"
+        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+        Margin="10"
+        VerticalAlignment="Top"
+        Height="100"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto"/>
+        
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="NoButton" Content="No" Margin="5" Click="NoButton_Click"/>
+            <Button x:Name="YesButton" Content="Yes" Margin="5" Click="YesButton_Click"/>
+        </StackPanel>
+
+    </StackPanel>
+    
+</Window>

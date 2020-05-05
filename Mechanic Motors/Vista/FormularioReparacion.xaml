@@ -18,47 +18,48 @@
     <StackPanel Orientation="Horizontal">
 
         <StackPanel Orientation="Vertical">
-            <TextBox materialDesign:HintAssist.Hint="Id de reparación"
+            <TextBox x:Name="IdReparacionTextBox" materialDesign:HintAssist.Hint="Id de reparación" IsReadOnly="True"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" Width="100" HorizontalAlignment="Left" Margin="10"/>
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="Person" Margin="0,20,0,0"/>
-                <TextBox x:Name="NombreCliente"
+                <TextBox x:Name="NombreClienteTextBox"
                     materialDesign:HintAssist.Hint="Nombre"
-                    materialDesign:HintAssist.HelperText="Nombre del cliente"
-                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
+                    materialDesign:HintAssist.HelperText="Obligtario"
+                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" PreviewTextInput="NombreClienteRegex"/>
+                <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Nombre del cliente"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="LocalPhone" Margin="0,20,0,0"/>
-                <TextBox  x:Name="TelefonoCliente"
+                <TextBox  x:Name="TelefonoClienteTextBox"
                     materialDesign:HintAssist.Hint="Telefono"
-                    materialDesign:HintAssist.HelperText="Telefono del cliente"
-                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" InputScope="TelephoneNumber"/>
+                    materialDesign:HintAssist.HelperText="Obligatorio"
+                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" PreviewTextInput="TelefonoClienteRegex" MaxLength="9"/>
+                <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Telefono de contacto"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="Email" Margin="0,20,0,0"/>
-                <TextBox
-                    x:Name="EmailCliente"
+                <TextBox x:Name="EmailClienteTextBox"
                     materialDesign:HintAssist.Hint="Email"
-                    materialDesign:HintAssist.HelperText="Email del cliente"
-                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" InputScope="EmailSmtpAddress"/>
+                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
+                <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Email del cliente para el email automático una vez finalizada la reparación"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="Car" Margin="0,20,0,0"/>
-                <TextBox
-                    x:Name="Vehiculo"
+                <TextBox x:Name="VehiculoTextBox"
                     materialDesign:HintAssist.Hint="Vehiculo"
-                    materialDesign:HintAssist.HelperText="Vehiculo a reparar"
-                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" InputScope="EmailSmtpAddress"/>
+                    materialDesign:HintAssist.HelperText="Obligatorio"
+                    VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
+                <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Vehiculo que será reparado o revisado"/>
             </StackPanel>
 
         </StackPanel>
 
-        <TextBox
+        <TextBox x:Name="DescripcionTextBox"
             Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
             VerticalAlignment="Top"
             AcceptsReturn="True"

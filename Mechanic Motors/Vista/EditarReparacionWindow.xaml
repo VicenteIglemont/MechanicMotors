@@ -1,11 +1,11 @@
-﻿<Window x:Class="Mechanic_Motors.Vista.NuevaReparacionWindow"
+﻿<Window x:Class="Mechanic_Motors.Vista.EditarReparacionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mechanic_Motors.Vista"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:Mechanic_Motors.Vista"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -13,11 +13,11 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Editar Reparacion" Height="550" Width="800" WindowStyle="None">
+        Title="EditarReparacionWindow" Height="550" Width="800" WindowStyle="None">
 
     <DockPanel LastChildFill="True">
 
-        <TextBlock  DockPanel.Dock="Top" Text="Nueva Reparacion" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="15"/>
+        <TextBlock  DockPanel.Dock="Top" Text="Editar Reparacion" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="15"/>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="CancelarNuevaReparacion" Content="Cancelar" Margin="10" Click="CancelarNuevaReparacion_Click"/>
@@ -27,5 +27,5 @@
         <local:FormularioReparacion x:Name="FormularioUserControl"/>
 
     </DockPanel>
-    
+
 </Window>

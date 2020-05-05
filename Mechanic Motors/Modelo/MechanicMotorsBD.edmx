@@ -20,13 +20,13 @@
           <Key>
             <PropertyRef Name="IdReparacion" />
           </Key>
-          <Property Name="IdReparacion" Type="int" Nullable="false" />
-          <Property Name="NombreCliente" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdReparacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="TelefonoCliente" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Vehiculo" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="DescripcionProblema" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="HoraEntrada" Type="datetime" Nullable="false" />
+          <Property Name="EmailCliente" Type="varchar" MaxLength="255" />
+          <Property Name="Vehiculo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HoraEntrada" Type="datetime" />
         </EntityType>
         <EntityContainer Name="MechanicMotorsModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
@@ -37,7 +37,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MechanicMotorsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Almacen">
+        <EntityType Name="Pieza">
           <Key>
             <PropertyRef Name="IdPieza" />
           </Key>
@@ -52,16 +52,16 @@
           <Key>
             <PropertyRef Name="IdReparacion" />
           </Key>
-          <Property Name="IdReparacion" Type="Int32" Nullable="false" />
-          <Property Name="NombreCliente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdReparacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TelefonoCliente" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Vehiculo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DescripcionProblema" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HoraEntrada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Vehiculo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoraEntrada" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MechanicMotorsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Almacen" EntityType="Self.Almacen" />
+        <EntityContainer Name="MechanicMotorsEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Almacen" EntityType="MechanicMotorsModel.Pieza" />
           <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
         </EntityContainer>
       </Schema>
@@ -69,9 +69,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities">
+        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntity">
           <EntitySetMapping Name="Almacen">
-            <EntityTypeMapping TypeName="MechanicMotorsModel.Almacen">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Pieza">
               <MappingFragment StoreEntitySet="Almacen">
                 <ScalarProperty Name="IdPieza" ColumnName="IdPieza" />
                 <ScalarProperty Name="NombrePieza" ColumnName="NombrePieza" />
@@ -88,9 +88,9 @@
                 <ScalarProperty Name="IdReparacion" ColumnName="IdReparacion" />
                 <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
                 <ScalarProperty Name="TelefonoCliente" ColumnName="TelefonoCliente" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
                 <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
-                <ScalarProperty Name="DescripcionProblema" ColumnName="DescripcionProblema" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
               </MappingFragment>
             </EntityTypeMapping>

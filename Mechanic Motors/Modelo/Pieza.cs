@@ -12,7 +12,7 @@ namespace Mechanic_Motors.Modelo
     using System;
     using System.Collections.Generic;
     
-    public partial class Almacen
+    public partial class Pieza
     {
         public int IdPieza { get; set; }
         public string NombrePieza { get; set; }

@@ -13,84 +13,119 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Mechanic MotorS" Height="1080" Width="1920" WindowState="Maximized" WindowStyle="None">
+        Title="Mechanic MotorS" Height="1080" Width="1920" WindowState="Maximized" WindowStyle="None" Topmost="True">
 
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="local:ComandosPersonalizados.NuevaReparacionCommand"
+            Executed="CommandBinding_NuevaReparacionExecuted"
+            CanExecute="CommandBinding_NuevaReparacionCanExecute"/>
+        <CommandBinding
+            Command="local:ComandosPersonalizados.NuevaPiezaCommand"
+            Executed="CommandBinding_NuevaPiezaExecuted"
+            CanExecute="CommandBinding_NuevaPiezaCanExecute"/>
+    </Window.CommandBindings>
+    
     <DockPanel>
-        
+
+        <Menu DockPanel.Dock="Top">
+            <Image x:Name="MiniLogo" Source="/Resources/LogoClaro.png" Width="35" Height="35"/>
+            <MenuItem Header="Nueva...">
+                <MenuItem Header="Reparacion" Command="local:ComandosPersonalizados.NuevaReparacionCommand"/>
+                <MenuItem Header="Pieza" Command="local:ComandosPersonalizados.NuevaPiezaCommand"/>
+                <MenuItem Header="Factura"/>
+            </MenuItem>
+            <MenuItem Header="Salir"/>
+        </Menu>
+
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <TextBlock DockPanel.Dock="Left" x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
-            </StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock DockPanel.Dock="Right" x:Name="HoraActualTextBlockMain" Text="Hora Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
-            </StatusBarItem>
+            <DockPanel Width="1905">
+                <StatusBarItem DockPanel.Dock="Left" Width="750">
+                    <TextBlock x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
+                </StatusBarItem>
+
+                <StatusBarItem DockPanel.Dock="Right" Width="750">
+                    <StackPanel Width="750">
+                        <TextBlock x:Name="HoraActualTextBlockMain" HorizontalAlignment="Right" Text="Hora Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </StatusBarItem>
+
+                <StackPanel HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="LightbulbOnOutline" HorizontalAlignment="Center" Height="25" Width="25" Margin="10"/>
+                    <ToggleButton x:Name="DarkModeToggle"
+                    Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                    ToolTip="Modo Oscuro" Click="DarkModeToggle_Click" />
+                </StackPanel>
+            </DockPanel>
         </StatusBar>
 
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
             <StackPanel>
                 <Expander  HorizontalAlignment="Stretch" Header="Reparaciones">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <DataGrid x:Name="ReparacionesDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Id Reparacion" Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding IdReparacion}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Cliente" Width="2*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding NombreCliente}"/>
-                                                <TextBlock Text="{Binding TelefonoCliente}"/>
-                                                <TextBlock Text="{Binding Email}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Vehiculo" Width="2*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Vehiculo}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Problema" Width="3*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding DescripcionProblema}" TextWrapping="Wrap"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Dia y hora" Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding HoraEntrada}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <Button Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
-                                                    Completar
-                                                </Button>
-                                                <Button Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
-                                                    Editar
-                                                </Button>
-                                                <Button Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
-                                                    Borrar
-                                                </Button>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10" HorizontalAlignment="Left" Click="Button_Click">
+                        <ScrollViewer MaxHeight="300">
+                            <DataGrid x:Name="ReparacionesDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id Reparacion" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IdReparacion}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cliente" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding NombreCliente}"/>
+                                                    <TextBlock Text="{Binding TelefonoCliente}"/>
+                                                    <TextBlock Text="{Binding EmailCliente}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Vehiculo" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Vehiculo}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Problema" Width="3*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Descripcion}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Dia y hora" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding HoraEntrada}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Button x:Name="CompletarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
+                                                        Completar
+                                                    </Button>
+                                                    <Button x:Name="EditarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="EditarButton_Click">
+                                                        Editar
+                                                    </Button>
+                                                    <Button x:Name="CancelarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="CancelarButton_Click">
+                                                        Borrar
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaReparacionButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaReparacionCommand">
                             <Image Source="/Resources/Suma.png"/>
                         </Button>
                     </StackPanel>
@@ -98,8 +133,69 @@
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                 <Expander  HorizontalAlignment="Stretch" Header="Almacen">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <DataGrid x:Name="AlmacenDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" CanUserAddRows="False" />
-                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Margin="10" HorizontalAlignment="Left">
+                        <ScrollViewer MaxHeight="300">
+                            <DataGrid x:Name="AlmacenDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id Pieza" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IdPieza}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Pieza" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding NombrePieza}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Vehiculo" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding VehiculoPerteneciente}" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Color" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Color}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Precio Unitario (€)" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding PrecioUnitario}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Cantidad" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical">
+                                                    <Button x:Name="EditarPiezaButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5">
+                                                        Editar
+                                                    </Button>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button x:Name="RestarCantidadButton" Click="RestarCantidadButton_Click">
+                                                            <materialDesign:PackIcon Kind="MinusCircleOutline" HorizontalAlignment="Left"/>
+                                                        </Button>
+                                                        <TextBlock Text="{Binding Cantidad}" HorizontalAlignment="Center" Margin="15,0"/>
+                                                        <Button x:Name="AñadirCantidadButton" Click="AñadirCantidadButton_Click">
+                                                            <materialDesign:PackIcon Kind="PlusCircle" HorizontalAlignment="Right"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaPiezaButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaPiezaCommand">
                             <Image Source="/Resources/Suma.png"/>
                         </Button>
                     </StackPanel>

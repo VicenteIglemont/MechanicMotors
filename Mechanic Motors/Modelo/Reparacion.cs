@@ -17,9 +17,9 @@ namespace Mechanic_Motors.Modelo
         public int IdReparacion { get; set; }
         public string NombreCliente { get; set; }
         public string TelefonoCliente { get; set; }
-        public string Email { get; set; }
+        public string EmailCliente { get; set; }
         public string Vehiculo { get; set; }
-        public string DescripcionProblema { get; set; }
-        public System.DateTime HoraEntrada { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<System.DateTime> HoraEntrada { get; set; }
     }
 }
