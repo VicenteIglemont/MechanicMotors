@@ -40,6 +40,7 @@
             <MenuItem Header="Salir"/>
         </Menu>
 
+        
         <StatusBar DockPanel.Dock="Bottom">
             <DockPanel Width="1905">
                 <StatusBarItem DockPanel.Dock="Left" Width="750">
