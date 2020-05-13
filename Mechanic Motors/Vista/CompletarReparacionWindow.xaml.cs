@@ -47,14 +47,19 @@ namespace Mechanic_Motors.Vista
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
+            string[] fecha = reparacionCompletada.HoraEntrada.ToString().Split(' ');
+            string dia = fecha[0];
+            string hora = fecha[1];
+
             if (EnviarEmailCheckBox.IsChecked == true)
             {
+
                 MailMessage emailAutomatico = new MailMessage();
                 emailAutomatico.To.Add(new MailAddress(reparacionCompletada.EmailCliente.ToString()));
                 emailAutomatico.From = new MailAddress("mechanicmotors.reparaciones@gmail.com");
-                emailAutomatico.Subject = "Asunto: Reparación de Mechanic Motors";
-                emailAutomatico.Body = $"Saludos, {reparacionCompletada.NombreCliente}. Nos ponemos en contacto con usted para informarle de que su reparación pendiente para el vehiculo {reparacionCompletada.Vehiculo} ha sido completada." +
-                    $"Si ha recibido este mensaje significa que su vehículo ya esta disponible para que usted lo recoja. Cualquier duda puede escribirnos empleando nuestra app 'MechanicMotorsClientes'." +
+                emailAutomatico.Subject = "Reparación de Mechanic Motors";
+                emailAutomatico.Body = $"Saludos, {reparacionCompletada.NombreCliente}. Nos ponemos en contacto con usted para informarle de que su reparación pendiente para el vehiculo {reparacionCompletada.Vehiculo} que nos dejó el {dia} a las {hora} ha sido completada." +
+                    $"Si ha recibido este mensaje significa que su vehículo ya esta disponible para que usted lo recoja. Cualquier duda puede escribirnos mediante nuestra app 'MechanicMotorsClientes' en la seccion de consultas." +
                     $"Un saludo y muchas gracias por su confianza.";
                 emailAutomatico.IsBodyHtml = true;
                 emailAutomatico.Priority = MailPriority.High;
@@ -83,5 +88,6 @@ namespace Mechanic_Motors.Vista
 
             this.Close();
         }
+    
     }
 }
