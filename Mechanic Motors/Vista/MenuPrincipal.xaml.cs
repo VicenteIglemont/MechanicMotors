@@ -66,7 +66,7 @@ namespace Mechanic_Motors.Vista
             HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
         }
 
-        private void EditarButton_Click(object sender, RoutedEventArgs e)
+        private void EditarReparacionButton_Click(object sender, RoutedEventArgs e)
         {
             Reparacion reparacionElegida = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
             EditarReparacionWindow editarReparacionWindow = new EditarReparacionWindow(reparacionElegida);
@@ -80,7 +80,7 @@ namespace Mechanic_Motors.Vista
             ReparacionesDataGrid.Items.Refresh();
         }
 
-        private void CancelarButton_Click(object sender, RoutedEventArgs e)
+        private void CancelarReparacionButton_Click(object sender, RoutedEventArgs e)
         {
             Reparacion reparacionCancelada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
             CancelarReparacionWindow cancelarReparacionWindow = new CancelarReparacionWindow(reparacionCancelada);
@@ -128,8 +128,6 @@ namespace Mechanic_Motors.Vista
             }
         }
 
-
-
         // Comandos
         private void CommandBinding_NuevaReparacionExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -155,6 +153,63 @@ namespace Mechanic_Motors.Vista
         private void CommandBinding_NuevaPiezaCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
+        }
+
+        private void EliminarPiezaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pieza piezaCancelada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
+
+            if(System.Windows.MessageBox.Show("¿Desea eliminar esta pieza?", "Eliminar Pieza", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                if(BDServicios.DeletePieza(piezaCancelada) == 1)
+                {
+                    System.Windows.MessageBox.Show("Pieza eliminada con éxito", "Eliminar pieza", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No se ha podido eliminar la pieza... Compruebe su conexión a internet", "Eliminar pieza", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void EditarPiezaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pieza piezaElegida = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
+            EditarPiezaWindow editarPiezaWindow = new EditarPiezaWindow(piezaElegida);
+            editarPiezaWindow.Owner = this;
+            editarPiezaWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            editarPiezaWindow.ShowDialog();
+            while (editarPiezaWindow.IsActive)
+            {
+
+            }
+            AlmacenDataGrid.Items.Refresh();
+        }
+
+        private void MenuItemSalir_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(1);
+        }
+
+        private void MiniLogo_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            ExpandUnicamente(sender as Expander);
+        }
+
+        private void ExpandUnicamente(Expander expander)
+        {
+            foreach(var hijo in ContenedorExpanders.Children)
+            {
+                if(hijo is Expander && hijo != expander)
+                {
+                    ((Expander)hijo).IsExpanded = false;
+                }
+            }
         }
     }
 }

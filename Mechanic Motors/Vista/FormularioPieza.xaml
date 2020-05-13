@@ -49,7 +49,7 @@
             <materialDesign:PackIcon Kind="Money" Margin="0,20,0,0"/>
             <TextBox x:Name="PrecioTextBox"
                 materialDesign:HintAssist.Hint="Precio"
-                materialDesign:HintAssist.HelperText="Obligatorio"
+                materialDesign:HintAssist.HelperText="Obligatorio. Los decimales van separados con ',' (coma)."
                 VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
             <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Precio de venta al publico por pieza"/>
         </StackPanel>

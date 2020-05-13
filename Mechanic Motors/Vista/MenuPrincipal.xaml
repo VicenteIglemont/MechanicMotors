@@ -25,21 +25,23 @@
             Executed="CommandBinding_NuevaPiezaExecuted"
             CanExecute="CommandBinding_NuevaPiezaCanExecute"/>
     </Window.CommandBindings>
-    
     <DockPanel>
 
         <Menu DockPanel.Dock="Top">
-            <Image x:Name="MiniLogo" Source="/Resources/LogoClaro.png" Width="35" Height="35"/>
+            <Image x:Name="MiniLogo" Source="/Resources/LogoClaro.png" Width="35" Height="35" MouseDown="MiniLogo_MouseDown"/>
             <MenuItem Header="Nueva...">
                 <MenuItem Header="Reparacion" Command="local:ComandosPersonalizados.NuevaReparacionCommand"/>
                 <MenuItem Header="Pieza" Command="local:ComandosPersonalizados.NuevaPiezaCommand"/>
                 <MenuItem Header="Factura"/>
             </MenuItem>
-            <MenuItem Header="Salir"/>
+            <MenuItem Header="Salir" Click="MenuItemSalir_Click"/>
         </Menu>
 
         
         <StatusBar DockPanel.Dock="Bottom">
+            
+            
+            
             <DockPanel Width="1905">
                 <StatusBarItem DockPanel.Dock="Left" Width="750">
                     <TextBlock x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
@@ -61,10 +63,10 @@
         </StatusBar>
 
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
-            <StackPanel>
-                <Expander  HorizontalAlignment="Stretch" Header="Reparaciones">
+            <StackPanel x:Name="ContenedorExpanders">
+                <Expander HorizontalAlignment="Stretch" Header="Reparaciones" Expanded="Expander_Expanded">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ScrollViewer MaxHeight="300">
+                        <ScrollViewer MaxHeight="650">
                             <DataGrid x:Name="ReparacionesDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Id Reparacion" Width="*">
@@ -113,10 +115,10 @@
                                                     <Button x:Name="CompletarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
                                                         Completar
                                                     </Button>
-                                                    <Button x:Name="EditarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="EditarButton_Click">
+                                                    <Button x:Name="EditarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="EditarReparacionButton_Click">
                                                         Editar
                                                     </Button>
-                                                    <Button x:Name="CancelarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="CancelarButton_Click">
+                                                    <Button x:Name="CancelarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="CancelarReparacionButton_Click">
                                                         Borrar
                                                     </Button>
                                                 </StackPanel>
@@ -132,9 +134,9 @@
                     </StackPanel>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander  HorizontalAlignment="Stretch" Header="Almacen">
+                <Expander  HorizontalAlignment="Stretch" Header="Almacen"  Expanded="Expander_Expanded">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ScrollViewer MaxHeight="300">
+                        <ScrollViewer MaxHeight="600">
                             <DataGrid x:Name="AlmacenDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Id Pieza" Width="*">
@@ -176,7 +178,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Vertical">
-                                                    <Button x:Name="EditarPiezaButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5">
+                                                    <Button x:Name="EditarPiezaButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Click="EditarPiezaButton_Click">
                                                         Editar
                                                     </Button>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -188,8 +190,10 @@
                                                             <materialDesign:PackIcon Kind="PlusCircle" HorizontalAlignment="Right"/>
                                                         </Button>
                                                     </StackPanel>
+                                                    <Button x:Name="EliminarPiezaButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="5" Click="EliminarPiezaButton_Click">
+                                                        Eliminar
+                                                    </Button>
                                                 </StackPanel>
-                                                
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -201,12 +205,15 @@
                         </Button>
                     </StackPanel>
                 </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                <Expander HorizontalAlignment="Stretch" Header="Citas pendientes">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <TextBlock Text="Aqui se veran las citas pendientes para el dia actual" />
-                        <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
-                    </StackPanel>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+                <Expander HorizontalAlignment="Stretch" Header="Citas pendientes" Expanded="Expander_Expanded">
+                    <ScrollViewer MaxHeight="550">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <TextBlock Text="Aqui se veran las citas pendientes para el dia actual" />
+                            <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </Expander>
             </StackPanel>
         </materialDesign:Card>

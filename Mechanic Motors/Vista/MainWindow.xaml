@@ -26,16 +26,27 @@
                     Style="{StaticResource MaterialDesignSwitchToggleButton}"
                     ToolTip="Modo Oscuro" Click="DarkModeToggle_Click" />
             </StackPanel>
-            <TextBlock DockPanel.Dock="Left" x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="45" FontSize="36" FontWeight="Bold"/>
-            <TextBlock DockPanel.Dock="Right" x:Name="HoraActualTextBlockMain" Text="Hora Actual Aqui" Margin="45" FontSize="36" FontWeight="Bold"/>
+            <TextBlock DockPanel.Dock="Left" x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="28" FontWeight="Bold"/>
+            <TextBlock DockPanel.Dock="Right" x:Name="HoraActualTextBlockMain" Text="Hora Actual Aqui" Margin="5" FontSize="28" FontWeight="Bold"/>
         </DockPanel>
 
-        <Image x:Name="CochesIzquierdaImagen" DockPanel.Dock="Left" Height="500" Margin="15"/>
-        <Image x:Name="CochesDerechaImagen" DockPanel.Dock="Right" Height="500" Margin="15"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.75*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-        <Button Width="250" Height="250" Style="{StaticResource MaterialDesignFloatingActionButton}" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
-            <Image x:Name="LogoImage" Source="/Resources/LogoClaro.png" DockPanel.Dock="Top" Width="150" Height="150"/>
-        </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Column="0" Grid.Row="0" x:Name="CochesIzquierdaImagen" DockPanel.Dock="Left" Height="500" Margin="15"/>
+            <Button Grid.Column="1" Grid.Row="0" Width="200" Height="200" Style="{StaticResource MaterialDesignFloatingActionButton}" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
+                <Image x:Name="LogoImage" Source="/Resources/LogoClaro.png" DockPanel.Dock="Top"/>
+            </Button>
+            <Image Grid.Column="2" Grid.Row="0" x:Name="CochesDerechaImagen" DockPanel.Dock="Right"/>
+        </Grid>
 
     </DockPanel>
     

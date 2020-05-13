@@ -42,12 +42,12 @@ namespace Mechanic_Motors.Vista
             FormularioUserControl.DescripcionTextBox.Text = reparacionElegida.Descripcion;
         }
 
-        private void CancelarNuevaReparacion_Click(object sender, RoutedEventArgs e)
+        private void CancelarModificacionReparacion_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void ConfirmarNuevaReparacion_Click(object sender, RoutedEventArgs e)
+        private void ConfirmarModificacionReparacion_Click(object sender, RoutedEventArgs e)
         {
             reparacionElegida.TelefonoCliente = FormularioUserControl.TelefonoClienteTextBox.Text.Trim();
             reparacionElegida.EmailCliente = FormularioUserControl.EmailClienteTextBox.Text.Trim();
@@ -58,15 +58,17 @@ namespace Mechanic_Motors.Vista
                 if (BDServicios.SaveReparacion(reparacionElegida) == 1)
                 {
                     MessageBox.Show("Reparación editada con exito", "Editar reparación", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido editar la reparacion...", "Editar reparación", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("No se ha podido editar la reparacion... Compruebe su conexión a internet", "Editar reparación", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Close();
                 }
             }
             else
             {
-                MessageBox.Show("Alguno de los campos es incorrecto... No se ha editado la reparacion...", "Nueva reparación", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Alguno de los campos es incorrecto... No se ha editado la reparacion...", "Editar reparación", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
