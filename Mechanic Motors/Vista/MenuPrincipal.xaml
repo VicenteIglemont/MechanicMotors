@@ -25,6 +25,7 @@
             Executed="CommandBinding_NuevaPiezaExecuted"
             CanExecute="CommandBinding_NuevaPiezaCanExecute"/>
     </Window.CommandBindings>
+
     <DockPanel>
 
         <Menu DockPanel.Dock="Top">
@@ -37,33 +38,33 @@
             <MenuItem Header="Salir" Click="MenuItemSalir_Click"/>
         </Menu>
 
-        
-        <StatusBar DockPanel.Dock="Bottom">
-            
-            
-            
-            <DockPanel Width="1905">
-                <StatusBarItem DockPanel.Dock="Left" Width="750">
-                    <TextBlock x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
-                </StatusBarItem>
+        <Border DockPanel.Dock="Bottom" Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
 
-                <StatusBarItem DockPanel.Dock="Right" Width="750">
-                    <StackPanel Width="750">
-                        <TextBlock x:Name="HoraActualTextBlockMain" HorizontalAlignment="Right" Text="Hora Actual Aqui" Margin="5" FontSize="16" FontWeight="Bold"/>
-                    </StackPanel>
-                </StatusBarItem>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-                <StackPanel HorizontalAlignment="Center">
-                    <materialDesign:PackIcon Kind="LightbulbOnOutline" HorizontalAlignment="Center" Height="25" Width="25" Margin="10"/>
-                    <ToggleButton x:Name="DarkModeToggle"
+            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="FechaActualTextBlockMain" Text="Fecha Actual Aqui" Margin="5" FontSize="28" FontWeight="Bold"/>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                <materialDesign:PackIcon Kind="LightbulbOnOutline" HorizontalAlignment="Center" Height="50" Width="50" Margin="10"/>
+                <ToggleButton x:Name="DarkModeToggle"
                     Style="{StaticResource MaterialDesignSwitchToggleButton}"
                     ToolTip="Modo Oscuro" Click="DarkModeToggle_Click" />
-                </StackPanel>
-            </DockPanel>
-        </StatusBar>
+            </StackPanel>
+
+            <TextBlock Grid.Row="0" Grid.Column="2" x:Name="HoraActualTextBlockMain" TextAlignment="Right" Text="Hora Actual Aqui" Margin="5" FontSize="28" FontWeight="Bold"/>
+        </Grid>
 
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
             <StackPanel x:Name="ContenedorExpanders">
+                
                 <Expander HorizontalAlignment="Stretch" Header="Reparaciones" Expanded="Expander_Expanded">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                         <ScrollViewer MaxHeight="650">
@@ -133,10 +134,12 @@
                         </Button>
                     </StackPanel>
                 </Expander>
+                
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                
                 <Expander  HorizontalAlignment="Stretch" Header="Almacen"  Expanded="Expander_Expanded">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ScrollViewer MaxHeight="600">
+                        <ScrollViewer MaxHeight="650">
                             <DataGrid x:Name="AlmacenDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Id Pieza" Width="*">
@@ -205,16 +208,20 @@
                         </Button>
                     </StackPanel>
                 </Expander>
+                
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+                
                 <Expander HorizontalAlignment="Stretch" Header="Citas pendientes" Expanded="Expander_Expanded">
-                    <ScrollViewer MaxHeight="550">
+                    <ScrollViewer MaxHeight="650">
                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                             <TextBlock Text="Aqui se veran las citas pendientes para el dia actual" />
                             <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
                         </StackPanel>
                     </ScrollViewer>
-                    
                 </Expander>
+
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+
             </StackPanel>
         </materialDesign:Card>
     </DockPanel>
