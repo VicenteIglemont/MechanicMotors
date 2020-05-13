@@ -108,6 +108,9 @@
       <DependentUpon>CancelarReparacionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vista\ComandosPersonalizados.cs" />
+    <Compile Include="Vista\CompletarReparacionWindow.xaml.cs">
+      <DependentUpon>CompletarReparacionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vista\EditarPiezaWindow.xaml.cs">
       <DependentUpon>EditarPiezaWindow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <DependentUpon>NuevaReparacionWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Vista\CancelarReparacionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\CompletarReparacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

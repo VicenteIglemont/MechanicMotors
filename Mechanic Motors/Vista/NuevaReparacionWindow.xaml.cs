@@ -23,7 +23,6 @@ namespace Mechanic_Motors.Vista
         {
             this.DataContext = new MenuPrincipalViewModel();
             InitializeComponent();
-            FormularioUserControl.IdReparacionTextBox.Text = (DataContext as MenuPrincipalViewModel).GetMaxIdReparacion().ToString();
         }
 
         private void CancelarNuevaReparacion_Click(object sender, RoutedEventArgs e)
@@ -35,7 +34,6 @@ namespace Mechanic_Motors.Vista
         {
             Reparacion reparacion = new Reparacion();
 
-            reparacion.IdReparacion = Convert.ToInt32(FormularioUserControl.IdReparacionTextBox.Text);
             reparacion.NombreCliente = FormularioUserControl.NombreClienteTextBox.Text.Trim();
             reparacion.TelefonoCliente = FormularioUserControl.TelefonoClienteTextBox.Text.Trim();
             reparacion.EmailCliente = FormularioUserControl.EmailClienteTextBox.Text.Trim();
@@ -48,6 +46,7 @@ namespace Mechanic_Motors.Vista
                 if(BDServicios.AddReparacion(reparacion) == 1)
                 {
                     MessageBox.Show("Reparación añadida con exito", "Nueva reparación", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 else
                 {

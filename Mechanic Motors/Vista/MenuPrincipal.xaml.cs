@@ -66,6 +66,20 @@ namespace Mechanic_Motors.Vista
             HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
         }
 
+        private void CompletarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Reparacion reparacionCompletada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
+            CompletarReparacionWindow completarReparacionWindow = new CompletarReparacionWindow(reparacionCompletada);
+            completarReparacionWindow.Owner = this;
+            completarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            completarReparacionWindow.ShowDialog();
+            while (completarReparacionWindow.IsActive)
+            {
+
+            }
+            ReparacionesDataGrid.Items.Refresh();
+        }
+
         private void EditarReparacionButton_Click(object sender, RoutedEventArgs e)
         {
             Reparacion reparacionElegida = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;

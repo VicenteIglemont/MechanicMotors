@@ -31,6 +31,7 @@ namespace Mechanic_Motors.VistaModelo
 
         public int GetMaxIdReparacion()
         {
+
             int maxId = 0;
             ObservableCollection<Reparacion> reparaciones = BDServicios.GetReparaciones();
 

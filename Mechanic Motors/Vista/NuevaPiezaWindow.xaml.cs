@@ -27,7 +27,6 @@ namespace Mechanic_Motors.Vista
         {
             this.DataContext = new MenuPrincipalViewModel();
             InitializeComponent();
-            FormularioUserControl.IdPiezaTextBox.Text = (DataContext as MenuPrincipalViewModel).GetMaxIdPieza().ToString();
         }
 
         private void CancelarNuevaPieza_Click(object sender, RoutedEventArgs e)
@@ -38,12 +37,15 @@ namespace Mechanic_Motors.Vista
         private void ConfirmarNuevaPieza_Click(object sender, RoutedEventArgs e)
         {
             Pieza pieza = new Pieza();
-            
-            pieza.IdPieza = Convert.ToInt32(FormularioUserControl.IdPiezaTextBox.Text);
+
+            FormularioUserControl.PrecioTextBox.Text.Replace('.', ',');
+
             pieza.NombrePieza = FormularioUserControl.NombrePiezaTextBox.Text.Trim();
             pieza.VehiculoPerteneciente = FormularioUserControl.VehiculoPertenecienteTextBox.Text.Trim();
-            pieza.Color = FormularioUserControl.ColorTextBox.Text.Trim();
-            pieza.PrecioUnitario = (float.Parse(FormularioUserControl.PrecioTextBox.Text, CultureInfo.InvariantCulture.NumberFormat) * 100) * 1.0 / 100;
+            pieza.Color = FormularioUserControl.ColorTextBox.Text;
+            pieza.PrecioUnitario = Convert.ToDouble(FormularioUserControl.PrecioTextBox.Text);
+            pieza.PrecioUnitario = Math.Round(pieza.PrecioUnitario, 2);
+
             pieza.Cantidad = Convert.ToInt32(FormularioUserControl.CantidadTextBox.Text);
 
             if(pieza.NombrePieza != "" || pieza.PrecioUnitario != 0 || pieza.Cantidad != 0)
@@ -51,10 +53,11 @@ namespace Mechanic_Motors.Vista
                 if (BDServicios.AddPieza(pieza) == 1)
                 {
                     MessageBox.Show("Pieza añadida con exito", "Nueva pieza", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido añadir la pieza...", "Nueva pieza", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("No se ha podido añadir la pieza... Compruebe su conexión a internet y revise los campos", "Nueva pieza", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else

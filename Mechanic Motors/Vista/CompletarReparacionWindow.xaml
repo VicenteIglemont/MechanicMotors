@@ -1,4 +1,4 @@
-﻿<Window x:Class="Mechanic_Motors.Vista.CancelarReparacionWindow"
+﻿<Window x:Class="Mechanic_Motors.Vista.CompletarReparacionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,11 +13,11 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Cancelar Reparacion" Height="400" Width="600" WindowStyle="None">
-    
+        Title="Completar Reparacion" Height="400" Width="600" WindowStyle="None">
+
     <StackPanel>
 
-        <TextBlock Text="¿Quieres cancelar la siguiente reparación?" Margin="0,30,0,0" HorizontalAlignment="Center"/>
+        <TextBlock Text="¿Quieres dar por completada la siguiente reparación?" Margin="0, 30, 0, 0" HorizontalAlignment="Center"/>
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <StackPanel Margin="10">
@@ -36,7 +36,7 @@
             </StackPanel>
         </StackPanel>
 
-        <TextBlock Text="Problema" Margin="10, 0"/>
+        <TextBlock Text="Problema:" Margin="10, 0"/>
         <TextBox x:Name="ProblemaTextBox" IsReadOnly="True"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
             Margin="10"
@@ -45,12 +45,12 @@
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"/>
 
+        <CheckBox x:Name="EnviarEmailCheckBox" Content="Generar y enviar email al correo electrónico especoficado por el cliente" Margin="10"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button x:Name="NoButton" Content="No" Margin="5" Click="NoButton_Click"/>
             <Button x:Name="YesButton" Content="Si" Margin="5" Click="YesButton_Click"/>
         </StackPanel>
-
+        
     </StackPanel>
-    
 </Window>

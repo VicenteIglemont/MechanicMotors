@@ -33,7 +33,6 @@
             <MenuItem Header="Nueva...">
                 <MenuItem Header="Reparacion" Command="local:ComandosPersonalizados.NuevaReparacionCommand"/>
                 <MenuItem Header="Pieza" Command="local:ComandosPersonalizados.NuevaPiezaCommand"/>
-                <MenuItem Header="Factura"/>
             </MenuItem>
             <MenuItem Header="Salir" Click="MenuItemSalir_Click"/>
         </Menu>
@@ -113,8 +112,8 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <Button x:Name="CompletarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5">
-                                                        Completar
+                                                    <Button x:Name="CompletarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="CompletarButton_Click">
+                                                        Avisar
                                                     </Button>
                                                     <Button x:Name="EditarButton" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Margin="5" Click="EditarReparacionButton_Click">
                                                         Editar
@@ -215,6 +214,17 @@
                     <ScrollViewer MaxHeight="650">
                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                             <TextBlock Text="Aqui se veran las citas pendientes para el dia actual" />
+                            <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Expander>
+
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+
+                <Expander HorizontalAlignment="Stretch" Header="Preguntas de los clientes" Expanded="Expander_Expanded">
+                    <ScrollViewer MaxHeight="650">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <TextBlock Text="Aqui se veran las consultas de los clientes" />
                             <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
                         </StackPanel>
                     </ScrollViewer>

@@ -31,11 +31,9 @@ namespace Mechanic_Motors.Vista
             this.DataContext = new MenuPrincipalViewModel();
             InitializeComponent();
 
-            FormularioUserControl.IdPiezaTextBox.IsReadOnly = true;
             FormularioUserControl.NombrePiezaTextBox.IsReadOnly = true;
             FormularioUserControl.VehiculoPertenecienteTextBox.IsReadOnly = true;
 
-            FormularioUserControl.IdPiezaTextBox.Text = piezaElegida.IdPieza.ToString();
             FormularioUserControl.NombrePiezaTextBox.Text = piezaElegida.NombrePieza;
             FormularioUserControl.VehiculoPertenecienteTextBox.Text =piezaElegida.VehiculoPerteneciente;
             FormularioUserControl.ColorTextBox.Text = piezaElegida.Color;
@@ -67,7 +65,7 @@ namespace Mechanic_Motors.Vista
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No se ha podido editar la pieza... Compruebe su conexión a internet", "Editar pieza", MessageBoxButton.OK, MessageBoxImage.Error);
+                    System.Windows.MessageBox.Show("No se ha podido editar la pieza... Compruebe su conexión a internet y revise los campos", "Editar pieza", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else

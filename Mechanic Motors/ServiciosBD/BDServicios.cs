@@ -26,11 +26,13 @@ namespace Mechanic_Motors.ServiciosBD
         // Obtenemos todos los registros de la base de datos
         public static ObservableCollection<Modelo.Reparacion> GetReparaciones()
         {
+            _contexto.Reparaciones.Load();
             return _contexto.Reparaciones.Local;
         }
 
         public static ObservableCollection<Modelo.Pieza> GetAlmacen()
         {
+            _contexto.Almacen.Load();
             return _contexto.Almacen.Local;
         }
         

@@ -18,9 +18,7 @@
     <StackPanel Orientation="Horizontal">
 
         <StackPanel Orientation="Vertical">
-            <TextBox x:Name="IdReparacionTextBox" materialDesign:HintAssist.Hint="Id de reparación" IsReadOnly="True"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                VerticalAlignment="Center" Width="100" HorizontalAlignment="Left" Margin="10"/>
+            <TextBlock Text="Datos del cliente" Margin="10" FontWeight="Bold"/>
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="Person" Margin="0,20,0,0"/>

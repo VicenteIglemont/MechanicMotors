@@ -30,11 +30,9 @@ namespace Mechanic_Motors.Vista
             this.DataContext = new MenuPrincipalViewModel();
             InitializeComponent();
 
-            FormularioUserControl.IdReparacionTextBox.IsReadOnly = true;
             FormularioUserControl.NombreClienteTextBox.IsReadOnly = true;
             FormularioUserControl.VehiculoTextBox.IsReadOnly = true;
 
-            FormularioUserControl.IdReparacionTextBox.Text = reparacionElegida.IdReparacion.ToString();
             FormularioUserControl.NombreClienteTextBox.Text = reparacionElegida.NombreCliente;
             FormularioUserControl.TelefonoClienteTextBox.Text = reparacionElegida.TelefonoCliente;
             FormularioUserControl.EmailClienteTextBox.Text = reparacionElegida.EmailCliente;
