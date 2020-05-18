@@ -16,6 +16,27 @@
           <Property Name="PrecioUnitario" Type="float" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HoraCita" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Consultas">
+          <Key>
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reparaciones">
           <Key>
             <PropertyRef Name="IdReparacion" />
@@ -30,7 +51,14 @@
         </EntityType>
         <EntityContainer Name="MechanicMotorsModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultas" EntityType="Self.Consultas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Consultas].[Email] AS [Email], 
+    [Consultas].[Descripcion] AS [Descripcion]
+    FROM [dbo].[Consultas] AS [Consultas]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -48,6 +76,17 @@
           <Property Name="PrecioUnitario" Type="Double" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoraCita" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="Reparacion">
           <Key>
             <PropertyRef Name="IdReparacion" />
@@ -60,16 +99,26 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HoraEntrada" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MechanicMotorsEntity" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MechanicMotorsEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Almacen" EntityType="MechanicMotorsModel.Pieza" />
+          <EntitySet Name="Citas" EntityType="MechanicMotorsModel.Cita" />
           <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
+          <EntitySet Name="Consultas" EntityType="MechanicMotorsModel.Consulta" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntity">
+        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities1">
           <EntitySetMapping Name="Almacen">
             <EntityTypeMapping TypeName="MechanicMotorsModel.Pieza">
               <MappingFragment StoreEntitySet="Almacen">
@@ -79,6 +128,18 @@
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Cita">
+              <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="TelefonoCliente" ColumnName="TelefonoCliente" />
+                <ScalarProperty Name="HoraCita" ColumnName="HoraCita" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -92,6 +153,14 @@
                 <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultas">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Consulta">
+              <MappingFragment StoreEntitySet="Consultas">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,12 +13,12 @@ namespace Mechanic_Motors.ServiciosBD
     {
 
         
-        private static readonly MechanicMotorsEntity _contexto;
+        private static readonly MechanicMotorsEntities1 _contexto;
 
         // Cargamos en el programa las tablas
         static BDServicios()
         {
-            _contexto = new MechanicMotorsEntity();
+            _contexto = new MechanicMotorsEntities1();
             _contexto.Reparaciones.Load();
             _contexto.Almacen.Load();
         }

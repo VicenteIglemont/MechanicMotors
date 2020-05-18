@@ -19,8 +19,5 @@ namespace Mechanic_Motors.Modelo
             public event PropertyChangedEventHandler PropertyChanged;
         }
 
-
-
-
     }
 }
