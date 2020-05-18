@@ -29,6 +29,20 @@ namespace Mechanic_Motors.VistaModelo
             return collection;
         }
 
+        public CollectionViewSource GetCitas()
+        {
+            CollectionViewSource collection = new CollectionViewSource();
+            collection.Source = BDServicios.GetCitas();
+            return collection;
+        }
+
+        public CollectionViewSource GetDudas()
+        {
+            CollectionViewSource collection = new CollectionViewSource();
+            collection.Source = BDServicios.GetDudas();
+            return collection;
+        }
+
         public int GetMaxIdReparacion()
         {
 

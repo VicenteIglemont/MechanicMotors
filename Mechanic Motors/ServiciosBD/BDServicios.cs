@@ -23,19 +23,34 @@ namespace Mechanic_Motors.ServiciosBD
             _contexto.Almacen.Load();
         }
 
-        // Obtenemos todos los registros de la base de datos
+        // Obtenemos todos los registros de las reparaciones
         public static ObservableCollection<Modelo.Reparacion> GetReparaciones()
         {
             _contexto.Reparaciones.Load();
             return _contexto.Reparaciones.Local;
         }
 
+        // Obtenemos todos los registros de las piezas
         public static ObservableCollection<Modelo.Pieza> GetAlmacen()
         {
             _contexto.Almacen.Load();
             return _contexto.Almacen.Local;
         }
-        
+
+        // Obtenemos todos los registros de las citas
+        internal static ObservableCollection<Modelo.Cita> GetCitas()
+        {
+            _contexto.Citas.Load();
+            return _contexto.Citas.Local;
+        }
+
+        // Obtenemos todos los registros de las consultas
+        public static ObservableCollection<Modelo.Consulta> GetDudas()
+        {
+            _contexto.Consultas.Load();
+            return _contexto.Consultas.Local;
+        }
+
         // Crea la nueva reparacion
         public static int AddReparacion(Modelo.Reparacion reparacion)
         {

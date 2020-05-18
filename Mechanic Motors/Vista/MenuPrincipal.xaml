@@ -62,11 +62,16 @@
         </Grid>
 
         <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" >
-            <StackPanel x:Name="ContenedorExpanders">
+            <DockPanel LastChildFill="False" x:Name="ContenedorExpanders">
                 
-                <Expander HorizontalAlignment="Stretch" Header="Reparaciones" Expanded="Expander_Expanded">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ScrollViewer MaxHeight="650">
+                <Expander HorizontalAlignment="Stretch" Header="Reparaciones" Expanded="Expander_Expanded" DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="True" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+
+                        <Button DockPanel.Dock="Bottom" Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaReparacionButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaReparacionCommand">
+                            <Image Source="/Resources/Suma.png"/>
+                        </Button>
+
+                        <ScrollViewer>
                             <DataGrid x:Name="ReparacionesDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Id Reparacion" Width="*">
@@ -128,17 +133,19 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaReparacionButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaReparacionCommand">
+                    </DockPanel>
+                </Expander>
+
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" DockPanel.Dock="Top"/>
+
+                <Expander  HorizontalAlignment="Stretch" Header="Almacen"  Expanded="Expander_Expanded" DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="True" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+
+                        <Button DockPanel.Dock="Bottom" Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaPiezaButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaPiezaCommand">
                             <Image Source="/Resources/Suma.png"/>
                         </Button>
-                    </StackPanel>
-                </Expander>
-                
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                
-                <Expander  HorizontalAlignment="Stretch" Header="Almacen"  Expanded="Expander_Expanded">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <ScrollViewer MaxHeight="650">
+
+                        <ScrollViewer>
                             <DataGrid x:Name="AlmacenDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Id Pieza" Width="*">
@@ -202,38 +209,95 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}" x:Name="NuevaPiezaButton" Margin="10" HorizontalAlignment="Left" Command="local:ComandosPersonalizados.NuevaPiezaCommand">
-                            <Image Source="/Resources/Suma.png"/>
-                        </Button>
-                    </StackPanel>
-                </Expander>
-                
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
-                
-                <Expander HorizontalAlignment="Stretch" Header="Citas pendientes" Expanded="Expander_Expanded">
-                    <ScrollViewer MaxHeight="650">
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <TextBlock Text="Aqui se veran las citas pendientes para el dia actual" />
-                            <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
-                        </StackPanel>
-                    </ScrollViewer>
+                    </DockPanel>
                 </Expander>
 
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" DockPanel.Dock="Top"/>
 
-                <Expander HorizontalAlignment="Stretch" Header="Preguntas de los clientes" Expanded="Expander_Expanded">
-                    <ScrollViewer MaxHeight="650">
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <TextBlock Text="Aqui se veran las consultas de los clientes" />
-                            <TextBlock Opacity=".68" Text="" TextWrapping="Wrap" />
-                        </StackPanel>
-                    </ScrollViewer>
+                <Expander HorizontalAlignment="Stretch" Header="Citas pendientes" Expanded="Expander_Expanded" DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="True" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <ScrollViewer>
+                            <DataGrid x:Name="CitasDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Informacion del vehículo" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Marca}"/>
+                                                    <TextBlock Text="{Binding Modelo}"/>
+                                                    <TextBlock Text="{Binding Matricula}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Nombre Cliente" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding NombreCliente}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Telefono" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TelefonoCliente}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Hora" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding HoraCita}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </DockPanel>
                 </Expander>
 
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"/>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" DockPanel.Dock="Top"/>
 
-            </StackPanel>
+                <Expander HorizontalAlignment="Stretch" Header="Preguntas de los clientes" Expanded="Expander_Expanded" DockPanel.Dock="Top">
+                    <DockPanel LastChildFill="True" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <ScrollViewer>
+                            <DataGrid x:Name="ConsultasDataGrid" Margin="0,8,0,0" ItemsSource="{Binding}" CanUserSortColumns="True" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Email" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Email}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Pregunta" Width="2*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Descripcion}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="ResponderDudaButton" Content="Responder"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Expander>
+
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" DockPanel.Dock="Top"/>
+
+            </DockPanel>
         </materialDesign:Card>
+        
     </DockPanel>
 
 </Window>

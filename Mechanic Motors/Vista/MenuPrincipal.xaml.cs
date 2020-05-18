@@ -37,6 +37,8 @@ namespace Mechanic_Motors.Vista
             ComprobarLogo();
             ReparacionesDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetReparaciones();
             AlmacenDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetAlmacen();
+            CitasDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetCitas();
+            ConsultasDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetDudas();
             FechaActualTextBlockMain.Text = $"{idioma.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek).ToUpper()}, {DateTime.Now.Day} de {DateTime.Now.ToString("MMMM").ToUpper()} de {DateTime.Now.Year}";
             HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
 
