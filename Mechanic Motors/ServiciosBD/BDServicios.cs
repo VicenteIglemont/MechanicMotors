@@ -38,7 +38,7 @@ namespace Mechanic_Motors.ServiciosBD
         }
 
         // Obtenemos todos los registros de las citas del dia
-        internal static ObservableCollection<Modelo.Cita> GetCitas()
+        public static ObservableCollection<Modelo.Cita> GetCitas()
         {
             _contexto.Citas.Load();
             ObservableCollection<Cita> citas = _contexto.Citas.Local;
@@ -168,9 +168,16 @@ namespace Mechanic_Motors.ServiciosBD
         }
 
         // Para borrar la consulta una vez respondida
-        internal static int DeleteConsulta(Consulta consultaCancelada)
+        public static int DeleteConsulta(Consulta consultaCancelada)
         {
             _contexto.Consultas.Remove(consultaCancelada);
+            return _contexto.SaveChanges();
+        }
+
+        // Para borrar la cita
+        public static int DeleteCita(Cita citaElegida)
+        {
+            _contexto.Citas.Remove(citaElegida);
             return _contexto.SaveChanges();
         }
     }

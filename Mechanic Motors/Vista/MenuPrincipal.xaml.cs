@@ -49,6 +49,14 @@ namespace Mechanic_Motors.Vista
             actualizarHora.Start();
         }
 
+
+
+
+
+        // //////////////////////////////////
+        // FRONT END
+        // //////////////////////////////////
+
         // Controla cual es el logo mostrado, el de tema claro u oscuro
         private void ComprobarLogo()
         {
@@ -116,6 +124,45 @@ namespace Mechanic_Motors.Vista
             HoraActualTextBlockMain.Text = hora;
         }
 
+        // Boton para cerrar la app
+        private void MenuItemSalir_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(1);
+        }
+
+        // Boton para volver al salvapantallas
+        private void MiniLogo_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        // Evento para controlar que solo haya un expander como máximo desplegado en cualquier momento
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            ExpandUnicamente(sender as Expander);
+        }
+
+        private void ExpandUnicamente(Expander expander)
+        {
+            foreach (var hijo in ContenedorExpanders.Children)
+            {
+                if (hijo is Expander && hijo != expander)
+                {
+                    ((Expander)hijo).IsExpanded = false;
+                }
+            }
+        }
+
+
+
+
+
+        // //////////////////////////////////
+        // BACK END
+        // //////////////////////////////////
+
+        // REPARACIONES
+
         // Boton para completar una reparacion y enviar un email en caso de asi quererlo
         private void CompletarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -174,6 +221,8 @@ namespace Mechanic_Motors.Vista
         {
             e.CanExecute = true;
         }
+
+        // PIEZAS
 
         // Comando para crear una nueva pieza
         private void CommandBinding_NuevaPiezaExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -242,34 +291,28 @@ namespace Mechanic_Motors.Vista
             AlmacenDataGrid.Items.Refresh();
         }
 
-        // Boton para cerrar la app
-        private void MenuItemSalir_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(1);
-        }
+        // CITAS
 
-        // Boton para volver al salvapantallas
-        private void MiniLogo_MouseDown(object sender, MouseButtonEventArgs e)
+        // Boton para eliminar una cita
+        private void EliminarCitaButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
+            Cita citaElegida = CitasDataGrid.SelectedItem as Modelo.Cita;
 
-        // Evento para controlar que solo haya un expander como máximo desplegado en cualquier momento
-        private void Expander_Expanded(object sender, RoutedEventArgs e)
-        {
-            ExpandUnicamente(sender as Expander);
-        }
-
-        private void ExpandUnicamente(Expander expander)
-        {
-            foreach(var hijo in ContenedorExpanders.Children)
+            if (System.Windows.MessageBox.Show("¿Desea eliminar esta cita?", "Eliminar cita", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if(hijo is Expander && hijo != expander)
+                if (BDServicios.DeleteCita(citaElegida) == 1)
                 {
-                    ((Expander)hijo).IsExpanded = false;
+                    System.Windows.MessageBox.Show("Cita eliminada con éxito", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CitasDataGrid.Items.Refresh();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No se ha podido eliminar la cita... Compruebe su conexión a internet", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
+
+        // CONSULTAS
 
         // Boton para responder a una consulta
         private void ResponderDudaButton_Click(object sender, RoutedEventArgs e)
@@ -296,6 +339,7 @@ namespace Mechanic_Motors.Vista
                 if (BDServicios.DeleteConsulta(consultaElegida) == 1)
                 {
                     System.Windows.MessageBox.Show("Consulta eliminada con éxito", "Eliminar Consulta", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ConsultasDataGrid.Items.Refresh();
                 }
                 else
                 {
@@ -303,5 +347,7 @@ namespace Mechanic_Motors.Vista
                 }
             }
         }
+
+        
     }
 }

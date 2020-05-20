@@ -251,6 +251,13 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Hora" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="EliminarCitaButton" Content="Eliminar" Style="{StaticResource MaterialDesignRaisedButton}" Click="EliminarCitaButton_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
@@ -284,8 +291,8 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <Button x:Name="ResponderDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Responder" Click="ResponderDudaButton_Click" Margin="15,0"/>
-                                                    <Button x:Name="EliminarDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Eliminar" Click="EliminarDudaButton_Click" Margin="15,0"/>
+                                                    <Button x:Name="ResponderDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Responder" Click="ResponderDudaButton_Click" Margin="5"/>
+                                                    <Button x:Name="EliminarDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Eliminar" Click="EliminarDudaButton_Click" Margin="5"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
