@@ -49,6 +49,7 @@ namespace Mechanic_Motors.Vista
             actualizarHora.Start();
         }
 
+        // Controla cual es el logo mostrado, el de tema claro u oscuro
         private void ComprobarLogo()
         {
             BundledTheme bundled = (BundledTheme)App.Current.Resources.MergedDictionaries.First();
@@ -63,71 +64,7 @@ namespace Mechanic_Motors.Vista
             }
         }
 
-        private void ActualizarHora_Tick(object sender, EventArgs e)
-        {
-            HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
-        }
-
-        private void CompletarButton_Click(object sender, RoutedEventArgs e)
-        {
-            Reparacion reparacionCompletada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
-            CompletarReparacionWindow completarReparacionWindow = new CompletarReparacionWindow(reparacionCompletada);
-            completarReparacionWindow.Owner = this;
-            completarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            completarReparacionWindow.ShowDialog();
-            while (completarReparacionWindow.IsActive)
-            {
-
-            }
-            ReparacionesDataGrid.Items.Refresh();
-        }
-
-        private void EditarReparacionButton_Click(object sender, RoutedEventArgs e)
-        {
-            Reparacion reparacionElegida = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
-            EditarReparacionWindow editarReparacionWindow = new EditarReparacionWindow(reparacionElegida);
-            editarReparacionWindow.Owner = this;
-            editarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            editarReparacionWindow.ShowDialog();
-            while (editarReparacionWindow.IsActive)
-            {
-
-            }
-            ReparacionesDataGrid.Items.Refresh();
-        }
-
-        private void CancelarReparacionButton_Click(object sender, RoutedEventArgs e)
-        {
-            Reparacion reparacionCancelada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
-            CancelarReparacionWindow cancelarReparacionWindow = new CancelarReparacionWindow(reparacionCancelada);
-            cancelarReparacionWindow.Owner = this;
-            cancelarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            cancelarReparacionWindow.ShowDialog();
-            while (cancelarReparacionWindow.IsActive)
-            {
-
-            }
-            ReparacionesDataGrid.Items.Refresh();
-        }
-
-        private void AñadirCantidadButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pieza piezaIncrementada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
-            if ((DataContext as MenuPrincipalViewModel).IncrementarPieza(piezaIncrementada) == 1) 
-            {
-                AlmacenDataGrid.Items.Refresh();
-            }
-        }
-
-        private void RestarCantidadButton_Click(object sender, RoutedEventArgs e)
-        {
-            Pieza piezaDecrementada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
-            if ((DataContext as MenuPrincipalViewModel).DecrementarPieza(piezaDecrementada) == 1)
-            {
-                AlmacenDataGrid.Items.Refresh();
-            }
-        }
-
+        // Boton que maneja el tema claro y el tema oscuro
         private void DarkModeToggle_Click(object sender, RoutedEventArgs e)
         {
             BundledTheme bundled = (BundledTheme)App.Current.Resources.MergedDictionaries.First();
@@ -144,7 +81,87 @@ namespace Mechanic_Motors.Vista
             }
         }
 
-        // Comandos
+        // Evento que controla que se actualice el timer de horas
+        private void ActualizarHora_Tick(object sender, EventArgs e)
+        {
+            string hora = "";
+
+            if(DateTime.Now.Hour.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Hour}:";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Hour}:";
+            }
+
+            if(DateTime.Now.Minute.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Minute}:";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Minute}:";
+            }
+
+            if(DateTime.Now.Second.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Second}";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Second}";
+            }
+
+            HoraActualTextBlockMain.Text = hora;
+        }
+
+        // Boton para completar una reparacion y enviar un email en caso de asi quererlo
+        private void CompletarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Reparacion reparacionCompletada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
+            CompletarReparacionWindow completarReparacionWindow = new CompletarReparacionWindow(reparacionCompletada);
+            completarReparacionWindow.Owner = this;
+            completarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            completarReparacionWindow.ShowDialog();
+            while (completarReparacionWindow.IsActive)
+            {
+
+            }
+            ReparacionesDataGrid.Items.Refresh();
+        }
+
+        // Boton para editar una reparacion
+        private void EditarReparacionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Reparacion reparacionElegida = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
+            EditarReparacionWindow editarReparacionWindow = new EditarReparacionWindow(reparacionElegida);
+            editarReparacionWindow.Owner = this;
+            editarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            editarReparacionWindow.ShowDialog();
+            while (editarReparacionWindow.IsActive)
+            {
+
+            }
+            ReparacionesDataGrid.Items.Refresh();
+        }
+
+        // Boton para cancelar y eliminar una reparacion
+        private void CancelarReparacionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Reparacion reparacionCancelada = ReparacionesDataGrid.SelectedItem as Modelo.Reparacion;
+            CancelarReparacionWindow cancelarReparacionWindow = new CancelarReparacionWindow(reparacionCancelada);
+            cancelarReparacionWindow.Owner = this;
+            cancelarReparacionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            cancelarReparacionWindow.ShowDialog();
+            while (cancelarReparacionWindow.IsActive)
+            {
+
+            }
+            ReparacionesDataGrid.Items.Refresh();
+        }
+
+        // Comando para registrar una nueva reparación
         private void CommandBinding_NuevaReparacionExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             NuevaReparacionWindow nuevaReparacionWindow = new NuevaReparacionWindow();
@@ -158,6 +175,7 @@ namespace Mechanic_Motors.Vista
             e.CanExecute = true;
         }
 
+        // Comando para crear una nueva pieza
         private void CommandBinding_NuevaPiezaExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             NuevaPiezaWindow nuevaPiezaWindow = new NuevaPiezaWindow();
@@ -171,6 +189,27 @@ namespace Mechanic_Motors.Vista
             e.CanExecute = true;
         }
 
+        // Boton que aumenta en 1 la cantidad de unidades de una pieza. 
+        private void AñadirCantidadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pieza piezaIncrementada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
+            if ((DataContext as MenuPrincipalViewModel).IncrementarPieza(piezaIncrementada) == 1)
+            {
+                AlmacenDataGrid.Items.Refresh();
+            }
+        }
+
+        // Boton que disminuye en 1 la cantidad de unidades de una pieza. 
+        private void RestarCantidadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pieza piezaDecrementada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
+            if ((DataContext as MenuPrincipalViewModel).DecrementarPieza(piezaDecrementada) == 1)
+            {
+                AlmacenDataGrid.Items.Refresh();
+            }
+        }
+
+        // Boton para proceder a la eliminacion de una pieza
         private void EliminarPiezaButton_Click(object sender, RoutedEventArgs e)
         {
             Pieza piezaCancelada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
@@ -188,6 +227,7 @@ namespace Mechanic_Motors.Vista
             }
         }
 
+        // Boton para proceder a la modificacion de una pieza
         private void EditarPiezaButton_Click(object sender, RoutedEventArgs e)
         {
             Pieza piezaElegida = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
@@ -202,16 +242,19 @@ namespace Mechanic_Motors.Vista
             AlmacenDataGrid.Items.Refresh();
         }
 
+        // Boton para cerrar la app
         private void MenuItemSalir_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(1);
         }
 
+        // Boton para volver al salvapantallas
         private void MiniLogo_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
 
+        // Evento para controlar que solo haya un expander como máximo desplegado en cualquier momento
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
             ExpandUnicamente(sender as Expander);
@@ -224,6 +267,39 @@ namespace Mechanic_Motors.Vista
                 if(hijo is Expander && hijo != expander)
                 {
                     ((Expander)hijo).IsExpanded = false;
+                }
+            }
+        }
+
+        // Boton para responder a una consulta
+        private void ResponderDudaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Consulta consultaElegida = ConsultasDataGrid.SelectedItem as Modelo.Consulta;
+            ResponderConsultaWindow responderConsultaWindow = new ResponderConsultaWindow(consultaElegida);
+            responderConsultaWindow.Owner = this;
+            responderConsultaWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            responderConsultaWindow.ShowDialog();
+            while (responderConsultaWindow.IsActive)
+            {
+
+            }
+            ConsultasDataGrid.Items.Refresh();
+        }
+
+        // Boton para eliminar una consulta
+        private void EliminarDudaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Consulta consultaElegida = ConsultasDataGrid.SelectedItem as Modelo.Consulta;
+
+            if (System.Windows.MessageBox.Show("¿Desea eliminar esta consulta?", "Eliminar Consulta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                if (BDServicios.DeleteConsulta(consultaElegida) == 1)
+                {
+                    System.Windows.MessageBox.Show("Consulta eliminada con éxito", "Eliminar Consulta", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No se ha podido eliminar la consulta... Compruebe su conexión a internet", "Eliminar Consulta", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

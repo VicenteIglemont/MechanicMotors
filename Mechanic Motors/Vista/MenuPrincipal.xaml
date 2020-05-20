@@ -283,7 +283,10 @@
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button x:Name="ResponderDudaButton" Content="Responder"/>
+                                                <StackPanel>
+                                                    <Button x:Name="ResponderDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Responder" Click="ResponderDudaButton_Click" Margin="15,0"/>
+                                                    <Button x:Name="EliminarDudaButton" Style="{StaticResource MaterialDesignRaisedButton}" Content="Eliminar" Click="EliminarDudaButton_Click" Margin="15,0"/>
+                                                </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

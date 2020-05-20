@@ -45,7 +45,7 @@
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto"/>
 
-        <CheckBox x:Name="EnviarEmailCheckBox" Content="Generar y enviar email al correo electrónico especoficado por el cliente" Margin="10"/>
+        <CheckBox x:Name="EnviarEmailCheckBox" Content="Generar y enviar email al correo electrónico especificado por el cliente" Margin="10"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button x:Name="NoButton" Content="No" Margin="5" Click="NoButton_Click"/>

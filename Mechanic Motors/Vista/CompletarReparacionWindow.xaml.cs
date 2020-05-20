@@ -40,11 +40,13 @@ namespace Mechanic_Motors.Vista
             ProblemaTextBox.Text = reparacionCompletada.Descripcion;
         }
 
+        // Cancelar dar por completada una reparacion
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Dar por completada una reparacion
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
             string[] fecha = reparacionCompletada.HoraEntrada.ToString().Split(' ');

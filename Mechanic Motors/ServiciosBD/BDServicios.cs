@@ -13,12 +13,12 @@ namespace Mechanic_Motors.ServiciosBD
     {
 
         
-        private static readonly MechanicMotorsEntities1 _contexto;
+        private static readonly MechanicMotorsEntities2 _contexto;
 
         // Cargamos en el programa las tablas
         static BDServicios()
         {
-            _contexto = new MechanicMotorsEntities1();
+            _contexto = new MechanicMotorsEntities2();
             _contexto.Reparaciones.Load();
             _contexto.Almacen.Load();
         }
@@ -37,11 +37,23 @@ namespace Mechanic_Motors.ServiciosBD
             return _contexto.Almacen.Local;
         }
 
-        // Obtenemos todos los registros de las citas
+        // Obtenemos todos los registros de las citas del dia
         internal static ObservableCollection<Modelo.Cita> GetCitas()
         {
             _contexto.Citas.Load();
-            return _contexto.Citas.Local;
+            ObservableCollection<Cita> citas = _contexto.Citas.Local;
+            ObservableCollection<Cita> citasDelDia = new ObservableCollection<Cita>();
+
+            foreach(Cita x in citas)
+            {
+                if(x.HoraCita.Day == DateTime.Now.Day && x.HoraCita.Month == DateTime.Now.Month && x.HoraCita.Year == DateTime.Now.Year)
+                {
+                    citasDelDia.Add(x);
+                }
+            }
+
+            return citasDelDia;
+
         }
 
         // Obtenemos todos los registros de las consultas
@@ -133,7 +145,6 @@ namespace Mechanic_Motors.ServiciosBD
             return _contexto.SaveChanges();
         }
 
-
         // Para asegurarnos de que actualizamos la BD correctamente buscamos la reparacion con el mismo id, se usa en las ediciones de reparaciones. 
         private static Reparacion BuscaReparacion(int idReparacion)
         {
@@ -145,8 +156,7 @@ namespace Mechanic_Motors.ServiciosBD
             return null;
         }
 
-        // Para asegurarnos de que actualizamos la BD correctamente buscamos la reparacion con el mismo id, se usa en las ediciones de piezas. 
-
+        // Para asegurarnos de que actualizamos la BD correctamente buscamos la reparacion con el mismo id, se usa en las ediciones de piezas.
         private static Pieza BuscaPieza(int idPieza)
         {
             foreach (Modelo.Pieza x in _contexto.Almacen)
@@ -155,6 +165,13 @@ namespace Mechanic_Motors.ServiciosBD
                     return x;
             }
             return null;
+        }
+
+        // Para borrar la consulta una vez respondida
+        internal static int DeleteConsulta(Consulta consultaCancelada)
+        {
+            _contexto.Consultas.Remove(consultaCancelada);
+            return _contexto.SaveChanges();
         }
     }
 }

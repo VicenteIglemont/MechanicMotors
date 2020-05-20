@@ -39,11 +39,13 @@ namespace Mechanic_Motors.Vista
 
         }
 
+        // Cancelar eliminacion de reparacion
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Confirmar eliminacion de reparacion
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
             if(BDServicios.DeleteReparacion(reparacionCancelada) == 1)

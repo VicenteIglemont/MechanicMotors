@@ -13,10 +13,10 @@ namespace Mechanic_Motors.Modelo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MechanicMotorsEntities1 : DbContext
+    public partial class MechanicMotorsEntities2 : DbContext
     {
-        public MechanicMotorsEntities1()
-            : base("name=MechanicMotorsEntities1")
+        public MechanicMotorsEntities2()
+            : base("name=MechanicMotorsEntities2")
         {
         }
     
@@ -27,7 +27,7 @@ namespace Mechanic_Motors.Modelo
     
         public virtual DbSet<Pieza> Almacen { get; set; }
         public virtual DbSet<Cita> Citas { get; set; }
-        public virtual DbSet<Reparacion> Reparaciones { get; set; }
         public virtual DbSet<Consulta> Consultas { get; set; }
+        public virtual DbSet<Reparacion> Reparaciones { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace Mechanic_Motors
 
             // Timer que ira cambiando las imagenes del Main Window
             DispatcherTimer cambiarImagen = new DispatcherTimer();
-            cambiarImagen.Interval = TimeSpan.FromSeconds(5);
+            cambiarImagen.Interval = TimeSpan.FromSeconds(3);
             cambiarImagen.Tick += CambiarImagen_Tick;
             cambiarImagen.Start();
         }
@@ -125,7 +125,36 @@ namespace Mechanic_Motors
         // Este evento de timer nos permitira que la hora se vaya actualizando de manera correcta
         private void ActualizarHora_Tick(object sender, EventArgs e)
         {
-            HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
+            string hora = "";
+
+            if (DateTime.Now.Hour.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Hour}:";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Hour}:";
+            }
+
+            if (DateTime.Now.Minute.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Minute}:";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Minute}:";
+            }
+
+            if (DateTime.Now.Second.ToString().Length == 1)
+            {
+                hora += $"0{DateTime.Now.Second}";
+            }
+            else
+            {
+                hora += $"{DateTime.Now.Second}";
+            }
+
+            HoraActualTextBlockMain.Text = hora;
         }
 
         // Aqui falta implementar el metodo que hara el cambio de tema de claro a oscuro y viceversa. 

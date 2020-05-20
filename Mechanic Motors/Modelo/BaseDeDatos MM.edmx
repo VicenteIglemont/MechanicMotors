@@ -27,13 +27,11 @@
           <Property Name="TelefonoCliente" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="HoraCita" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Consultas">
           <Key>
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -52,13 +50,8 @@ advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene defin
         <EntityContainer Name="MechanicMotorsModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Consultas" EntityType="Self.Consultas" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Consultas].[Email] AS [Email], 
-    [Consultas].[Descripcion] AS [Descripcion]
-    FROM [dbo].[Consultas] AS [Consultas]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -87,6 +80,14 @@ advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene defin
           <Property Name="TelefonoCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HoraCita" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reparacion">
           <Key>
             <PropertyRef Name="IdReparacion" />
@@ -99,26 +100,18 @@ advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene defin
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HoraEntrada" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Consulta">
-          <Key>
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="MechanicMotorsEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MechanicMotorsEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Almacen" EntityType="MechanicMotorsModel.Pieza" />
           <EntitySet Name="Citas" EntityType="MechanicMotorsModel.Cita" />
-          <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
           <EntitySet Name="Consultas" EntityType="MechanicMotorsModel.Consulta" />
+          <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities1">
+        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities2">
           <EntitySetMapping Name="Almacen">
             <EntityTypeMapping TypeName="MechanicMotorsModel.Pieza">
               <MappingFragment StoreEntitySet="Almacen">
@@ -143,6 +136,15 @@ advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Consultas">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Consulta">
+              <MappingFragment StoreEntitySet="Consultas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reparaciones">
             <EntityTypeMapping TypeName="MechanicMotorsModel.Reparacion">
               <MappingFragment StoreEntitySet="Reparaciones">
@@ -153,14 +155,6 @@ advertencia 6002: La tabla o vista 'MechanicMotors.dbo.Consultas' no tiene defin
                 <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Consultas">
-            <EntityTypeMapping TypeName="MechanicMotorsModel.Consulta">
-              <MappingFragment StoreEntitySet="Consultas">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

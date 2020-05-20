@@ -80,33 +80,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modelo\BaseDeDatos MM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDeDatos MM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\BaseDeDatos MM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\BaseDeDatos MM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDeDatos MM.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Cita.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\ClasesParciales.cs" />
     <Compile Include="Modelo\Consulta.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Modelo\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Pieza.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Reparacion.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiciosBD\BDServicios.cs" />
     <Compile Include="VistaModelo\MenuPrincipalViewModel.cs" />
@@ -137,6 +137,9 @@
     </Compile>
     <Compile Include="Vista\NuevaReparacionWindow.xaml.cs">
       <DependentUpon>NuevaReparacionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ResponderConsultaWindow.xaml.cs">
+      <DependentUpon>ResponderConsultaWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Vista\CancelarReparacionWindow.xaml">
       <SubType>Designer</SubType>
@@ -186,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vista\ResponderConsultaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -205,12 +212,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Modelo\Model1.edmx">
+    <EntityDeploy Include="Modelo\BaseDeDatos MM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>BaseDeDatos MM.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Modelo\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="Modelo\BaseDeDatos MM.edmx.diagram">
+      <DependentUpon>BaseDeDatos MM.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -245,15 +252,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modelo\Model1.Context.tt">
+    <Content Include="Modelo\BaseDeDatos MM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>BaseDeDatos MM.edmx</DependentUpon>
+      <LastGenOutput>BaseDeDatos MM.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelo\Model1.tt">
+    <Content Include="Modelo\BaseDeDatos MM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>BaseDeDatos MM.edmx</DependentUpon>
+      <LastGenOutput>BaseDeDatos MM.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

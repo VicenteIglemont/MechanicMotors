@@ -42,11 +42,13 @@ namespace Mechanic_Motors.Vista
 
         }
 
+        // Cancelar modificacion de una pieza
         private void CancelarModificacionPieza_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // COnfirmar los cambios realizados a una pieza
         private void ConfirmarModificacionPieza_Click(object sender, RoutedEventArgs e)
         {
             FormularioUserControl.PrecioTextBox.Text.Replace('.', ',');
