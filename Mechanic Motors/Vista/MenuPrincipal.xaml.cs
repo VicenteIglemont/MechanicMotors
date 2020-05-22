@@ -303,13 +303,14 @@ namespace Mechanic_Motors.Vista
                 if (BDServicios.DeleteCita(citaElegida) == 1)
                 {
                     System.Windows.MessageBox.Show("Cita eliminada con éxito", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
-                    CitasDataGrid.Items.Refresh();
                 }
                 else
                 {
                     System.Windows.MessageBox.Show("No se ha podido eliminar la cita... Compruebe su conexión a internet", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
+
+            CitasDataGrid.Items.Refresh();
         }
 
         // CONSULTAS
