@@ -1,4 +1,5 @@
-﻿using Mechanic_Motors.ServiciosBD;
+﻿using Mechanic_Motors.Modelo;
+using Mechanic_Motors.ServiciosBD;
 using Mechanic_Motors.VistaModelo;
 using System;
 using System.Collections.Generic;
@@ -60,8 +61,8 @@ namespace Mechanic_Motors.Vista
                 emailAutomatico.To.Add(new MailAddress(reparacionCompletada.EmailCliente.ToString()));
                 emailAutomatico.From = new MailAddress("mechanicmotors.reparaciones@gmail.com");
                 emailAutomatico.Subject = "Reparación de Mechanic Motors";
-                emailAutomatico.Body = $"Saludos, {reparacionCompletada.NombreCliente}. Nos ponemos en contacto con usted para informarle de que su reparación pendiente para el vehículo {reparacionCompletada.Vehiculo} que nos dejó el {dia} a las {hora} ha sido completada." +
-                    $"Si ha recibido este mensaje significa que su vehículo ya está disponible para que usted lo recoja. Cualquier duda puede escribirnos mediante nuestra app 'MechanicMotorsClientes' en la seccion de consultas." +
+                emailAutomatico.Body = $"Saludos, {reparacionCompletada.NombreCliente}. <br/> Nos ponemos en contacto con usted para informarle de que su reparación pendiente para el vehículo {reparacionCompletada.Vehiculo} que nos dejó el {dia} ha sido completada. <br/>" +
+                    $"Si ha recibido este mensaje significa que su vehículo ya está disponible para que usted lo recoja. <br/> Cualquier duda puede escribirnos mediante nuestra app 'MechanicMotorsClientes' en la seccion de consultas. <br/> <br/>" +
                     $"Un saludo y muchas gracias por su confianza.";
                 emailAutomatico.IsBodyHtml = true;
                 emailAutomatico.Priority = MailPriority.High;
@@ -85,7 +86,10 @@ namespace Mechanic_Motors.Vista
                 }
             }
 
-            reparacionCompletada.Descripcion = "TERMINADA | " + reparacionCompletada.Descripcion;
+            if(!reparacionCompletada.Descripcion.Contains("TERMINADA | "))
+            {
+                reparacionCompletada.Descripcion = "TERMINADA | " + reparacionCompletada.Descripcion;
+            }
             BDServicios.SaveReparacion(reparacionCompletada);
 
             this.Close();

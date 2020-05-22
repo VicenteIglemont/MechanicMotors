@@ -9,6 +9,8 @@
 
     <StackPanel>
 
+        <TextBlock Text="Responder Consulta" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="15"/>
+
         <TextBlock x:Name="EmailTextBlock" Text="Consulta de: " Margin="10, 0"/>
         <TextBox x:Name="ConsultaTextBox" IsReadOnly="True"
             Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"

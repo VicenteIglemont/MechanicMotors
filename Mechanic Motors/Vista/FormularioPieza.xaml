@@ -48,7 +48,7 @@
             <TextBox x:Name="PrecioTextBox"
                 materialDesign:HintAssist.Hint="Precio"
                 materialDesign:HintAssist.HelperText="Obligatorio. Los decimales van separados con ',' (coma)."
-                VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
+                VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" PreviewTextInput="PrecioTextBox_PreviewTextInput"/>
             <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Precio de venta al publico por pieza"/>
         </StackPanel>
 
@@ -57,7 +57,7 @@
             <TextBox x:Name="CantidadTextBox"
                 materialDesign:HintAssist.Hint="Cantidad"
                 materialDesign:HintAssist.HelperText="Obligatorio"
-                VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0"/>
+                VerticalAlignment="Center" Width="300" HorizontalAlignment="Left" Margin="5,15,0,0" PreviewTextInput="CantidadTextBox_PreviewTextInput"/>
             <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Margin="0,20,0,0" ToolTip="Cuantas piezas han llegado al almacen"/>
         </StackPanel>
 

@@ -25,11 +25,13 @@ namespace Mechanic_Motors.Vista
             InitializeComponent();
         }
 
+        // Cancelamos el registro de la reparacion
         private void CancelarNuevaReparacion_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Confirmamos el registro de la reparacion
         private void ConfirmarNuevaReparacion_Click(object sender, RoutedEventArgs e)
         {
             Reparacion reparacion = new Reparacion();

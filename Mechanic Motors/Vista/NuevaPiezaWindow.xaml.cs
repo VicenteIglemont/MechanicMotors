@@ -29,11 +29,13 @@ namespace Mechanic_Motors.Vista
             InitializeComponent();
         }
 
+        // Cancelar registro de la pieza
         private void CancelarNuevaPieza_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Confirmar registro de la pieza
         private void ConfirmarNuevaPieza_Click(object sender, RoutedEventArgs e)
         {
             Pieza pieza = new Pieza();

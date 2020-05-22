@@ -40,11 +40,13 @@ namespace Mechanic_Motors.Vista
             FormularioUserControl.DescripcionTextBox.Text = reparacionElegida.Descripcion;
         }
 
+        // Cancela la modificacion de una reparacion
         private void CancelarModificacionReparacion_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Confirma los cambios realizados en la reparacion
         private void ConfirmarModificacionReparacion_Click(object sender, RoutedEventArgs e)
         {
             reparacionElegida.TelefonoCliente = FormularioUserControl.TelefonoClienteTextBox.Text.Trim();

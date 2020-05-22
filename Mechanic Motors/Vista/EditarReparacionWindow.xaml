@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Editar Reparacion" Height="550" Width="800" WindowStyle="None">
+        Title="Editar Reparacion" Height="450" Width="800" WindowStyle="None">
 
     <DockPanel LastChildFill="True">
 
