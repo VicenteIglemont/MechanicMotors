@@ -86,14 +86,25 @@ namespace Mechanic_Motors.Vista
                 }
             }
 
-            if(!reparacionCompletada.Descripcion.Contains("TERMINADA | "))
-            {
-                reparacionCompletada.Descripcion = "TERMINADA | " + reparacionCompletada.Descripcion;
-            }
-            BDServicios.SaveReparacion(reparacionCompletada);
+            PasarAHistorial(reparacionCompletada);
 
             this.Close();
         }
-    
+
+        // Metodo mediante el cual pasamos la reparacion al historial de reparaciones
+        private void PasarAHistorial(Reparacion r)
+        {
+            Historial historial = new Historial();
+            historial.NombreCliente = r.NombreCliente;
+            historial.EmailCliente = r.EmailCliente;
+            historial.TelefonoCliente = r.TelefonoCliente;
+            historial.Vehiculo = r.Vehiculo;
+            historial.Descripcion = r.Descripcion;
+            historial.HoraEntrada = r.HoraEntrada;
+            historial.HoraFinalizacion = DateTime.Now;
+
+            BDServicios.AddHistorial(historial);
+            BDServicios.DeleteReparacion(r);
+        }
     }
 }

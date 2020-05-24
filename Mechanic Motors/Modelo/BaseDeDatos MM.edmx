@@ -35,6 +35,19 @@
           <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="HistorialReparaciones">
+          <Key>
+            <PropertyRef Name="IdReparacion" />
+          </Key>
+          <Property Name="IdReparacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EmailCliente" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Vehiculo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HoraEntrada" Type="datetime" />
+          <Property Name="HoraFinalizacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Reparaciones">
           <Key>
             <PropertyRef Name="IdReparacion" />
@@ -51,6 +64,7 @@
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistorialReparaciones" EntityType="Self.HistorialReparaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -88,6 +102,19 @@
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="IdReparacion" />
+          </Key>
+          <Property Name="IdReparacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefonoCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailCliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vehiculo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoraEntrada" Type="DateTime" Precision="3" />
+          <Property Name="HoraFinalizacion" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Reparacion">
           <Key>
             <PropertyRef Name="IdReparacion" />
@@ -100,19 +127,20 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HoraEntrada" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MechanicMotorsEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Almacen" EntityType="MechanicMotorsModel.Pieza" />
-          <EntitySet Name="Citas" EntityType="MechanicMotorsModel.Cita" />
-          <EntitySet Name="Consultas" EntityType="MechanicMotorsModel.Consulta" />
-          <EntitySet Name="Reparaciones" EntityType="MechanicMotorsModel.Reparacion" />
+        <EntityContainer Name="MechanicMotorsEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Piezas" EntityType="MechanicMotorsModel.Pieza" />
+          <EntitySet Name="Citas" EntityType="Self.Cita" />
+          <EntitySet Name="Consultas" EntityType="Self.Consulta" />
+          <EntitySet Name="Historials" EntityType="MechanicMotorsModel.Historial" />
+          <EntitySet Name="Reparacions" EntityType="MechanicMotorsModel.Reparacion" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities2">
-          <EntitySetMapping Name="Almacen">
+        <EntityContainerMapping StorageEntityContainer="MechanicMotorsModelStoreContainer" CdmEntityContainer="MechanicMotorsEntities3">
+          <EntitySetMapping Name="Piezas">
             <EntityTypeMapping TypeName="MechanicMotorsModel.Pieza">
               <MappingFragment StoreEntitySet="Almacen">
                 <ScalarProperty Name="IdPieza" ColumnName="IdPieza" />
@@ -145,7 +173,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reparaciones">
+          <EntitySetMapping Name="Historials">
+            <EntityTypeMapping TypeName="MechanicMotorsModel.Historial">
+              <MappingFragment StoreEntitySet="HistorialReparaciones">
+                <ScalarProperty Name="IdReparacion" ColumnName="IdReparacion" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="TelefonoCliente" ColumnName="TelefonoCliente" />
+                <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+                <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="HoraEntrada" ColumnName="HoraEntrada" />
+                <ScalarProperty Name="HoraFinalizacion" ColumnName="HoraFinalizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparacions">
             <EntityTypeMapping TypeName="MechanicMotorsModel.Reparacion">
               <MappingFragment StoreEntitySet="Reparaciones">
                 <ScalarProperty Name="IdReparacion" ColumnName="IdReparacion" />
@@ -172,7 +214,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

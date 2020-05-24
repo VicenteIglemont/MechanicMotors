@@ -43,6 +43,13 @@ namespace Mechanic_Motors.VistaModelo
             return collection;
         }
 
+        public CollectionViewSource GetHistorial()
+        {
+            CollectionViewSource collection = new CollectionViewSource();
+            collection.Source = BDServicios.GetHistorial();
+            return collection;
+        }
+
         public int GetMaxIdReparacion()
         {
 

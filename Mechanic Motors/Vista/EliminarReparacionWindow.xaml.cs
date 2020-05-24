@@ -51,13 +51,12 @@ namespace Mechanic_Motors.Vista
             if(BDServicios.DeleteReparacion(reparacionCancelada) == 1)
             {
                 MessageBox.Show("Reparacion eliminada con exito", "Eliminar reparacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             else
             {
                 MessageBox.Show("No se ha podido eliminar la reparacion", "Eliminar reparacion", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            this.Close();
         }
     }
 }

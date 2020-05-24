@@ -102,6 +102,9 @@
     <Compile Include="Modelo\Consulta.cs">
       <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Historial.cs">
+      <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\Pieza.cs">
       <DependentUpon>BaseDeDatos MM.tt</DependentUpon>
     </Compile>
@@ -110,8 +113,8 @@
     </Compile>
     <Compile Include="ServiciosBD\BDServicios.cs" />
     <Compile Include="VistaModelo\MenuPrincipalViewModel.cs" />
-    <Compile Include="Vista\CancelarReparacionWindow.xaml.cs">
-      <DependentUpon>CancelarReparacionWindow.xaml</DependentUpon>
+    <Compile Include="Vista\EliminarReparacionWindow.xaml.cs">
+      <DependentUpon>EliminarReparacionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vista\ComandosPersonalizados.cs" />
     <Compile Include="Vista\CompletarReparacionWindow.xaml.cs">
@@ -122,6 +125,15 @@
     </Compile>
     <Compile Include="Vista\EditarReparacionWindow.xaml.cs">
       <DependentUpon>EditarReparacionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\EliminarCitaWindow.xaml.cs">
+      <DependentUpon>EliminarCitaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\EliminarConsultaWindow.xaml.cs">
+      <DependentUpon>EliminarConsultaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\EliminarPiezaWindow.xaml.cs">
+      <DependentUpon>EliminarPiezaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vista\FormularioPieza.xaml.cs">
       <DependentUpon>FormularioPieza.xaml</DependentUpon>
@@ -141,7 +153,7 @@
     <Compile Include="Vista\ResponderConsultaWindow.xaml.cs">
       <DependentUpon>ResponderConsultaWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Vista\CancelarReparacionWindow.xaml">
+    <Page Include="Vista\EliminarReparacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +166,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vista\EditarReparacionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\EliminarCitaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\EliminarConsultaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\EliminarPiezaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,28 +13,34 @@ namespace Mechanic_Motors.ServiciosBD
     {
 
         
-        private static readonly MechanicMotorsEntities2 _contexto;
+        private static readonly MechanicMotorsEntities3 _contexto;
 
         // Cargamos en el programa las tablas
         static BDServicios()
         {
-            _contexto = new MechanicMotorsEntities2();
-            _contexto.Reparaciones.Load();
-            _contexto.Almacen.Load();
+            _contexto = new MechanicMotorsEntities3();
+            _contexto.Reparacions.Load();
+            _contexto.Piezas.Load();
         }
 
         // Obtenemos todos los registros de las reparaciones
         public static ObservableCollection<Modelo.Reparacion> GetReparaciones()
         {
-            _contexto.Reparaciones.Load();
-            return _contexto.Reparaciones.Local;
+            _contexto.Reparacions.Load();
+            return _contexto.Reparacions.Local;
+        }
+
+        public static ObservableCollection<Modelo.Historial> GetHistorial()
+        {
+            _contexto.Historials.Load();
+            return _contexto.Historials.Local;
         }
 
         // Obtenemos todos los registros de las piezas
         public static ObservableCollection<Modelo.Pieza> GetAlmacen()
         {
-            _contexto.Almacen.Load();
-            return _contexto.Almacen.Local;
+            _contexto.Piezas.Load();
+            return _contexto.Piezas.Local;
         }
 
         // Obtenemos todos los registros de las citas del dia
@@ -53,7 +59,6 @@ namespace Mechanic_Motors.ServiciosBD
             }
 
             return citasDelDia;
-
         }
 
         // Obtenemos todos los registros de las consultas
@@ -63,10 +68,12 @@ namespace Mechanic_Motors.ServiciosBD
             return _contexto.Consultas.Local;
         }
 
+
+
         // Crea la nueva reparacion
         public static int AddReparacion(Modelo.Reparacion reparacion)
         {
-            _contexto.Reparaciones.Add(reparacion);
+            _contexto.Reparacions.Add(reparacion);
             return _contexto.SaveChanges();
         }
 
@@ -85,21 +92,23 @@ namespace Mechanic_Motors.ServiciosBD
         // Borra la reparacion
         public static int DeleteReparacion(Reparacion reparacionCancelada)
         {
-            _contexto.Reparaciones.Remove(reparacionCancelada);
+            _contexto.Reparacions.Remove(reparacionCancelada);
             return _contexto.SaveChanges();
         }
+
+
 
         // Crea la nueva pieza
         public static int AddPieza(Modelo.Pieza pieza)
         {
-            _contexto.Almacen.Add(pieza);
+            _contexto.Piezas.Add(pieza);
             return _contexto.SaveChanges();
         }
 
         // Incrementa en 1 la cantidad de la pieza
         public static int IncrementarPieza(Pieza piezaIncrementada)
         {
-            foreach(Pieza x in _contexto.Almacen)
+            foreach(Pieza x in _contexto.Piezas)
             {
                 if(x.IdPieza == piezaIncrementada.IdPieza)
                 {
@@ -113,7 +122,7 @@ namespace Mechanic_Motors.ServiciosBD
         // Decrementa en 1 la cantidad de la pieza
         public static int DecrementarPieza(Pieza piezaDecrementada)
         {
-            foreach (Pieza x in _contexto.Almacen)
+            foreach (Pieza x in _contexto.Piezas)
             {
                 if (x.IdPieza == piezaDecrementada.IdPieza)
                 {
@@ -141,14 +150,16 @@ namespace Mechanic_Motors.ServiciosBD
         // Borra una pieza
         public static int DeletePieza(Pieza piezaCancelada)
         {
-            _contexto.Almacen.Remove(piezaCancelada);
+            _contexto.Piezas.Remove(piezaCancelada);
             return _contexto.SaveChanges();
         }
+
+
 
         // Para asegurarnos de que actualizamos la BD correctamente buscamos la reparacion con el mismo id, se usa en las ediciones de reparaciones. 
         private static Reparacion BuscaReparacion(int idReparacion)
         {
-            foreach (Modelo.Reparacion x in _contexto.Reparaciones)
+            foreach (Modelo.Reparacion x in _contexto.Reparacions)
             {
                 if (x.IdReparacion == idReparacion)
                     return x;
@@ -159,13 +170,16 @@ namespace Mechanic_Motors.ServiciosBD
         // Para asegurarnos de que actualizamos la BD correctamente buscamos la reparacion con el mismo id, se usa en las ediciones de piezas.
         private static Pieza BuscaPieza(int idPieza)
         {
-            foreach (Modelo.Pieza x in _contexto.Almacen)
+            foreach (Modelo.Pieza x in _contexto.Piezas)
             {
                 if (x.IdPieza == idPieza)
                     return x;
             }
             return null;
         }
+
+
+
 
         // Para borrar la consulta una vez respondida
         public static int DeleteConsulta(Consulta consultaCancelada)
@@ -178,6 +192,15 @@ namespace Mechanic_Motors.ServiciosBD
         public static int DeleteCita(Cita citaElegida)
         {
             _contexto.Citas.Remove(citaElegida);
+            return _contexto.SaveChanges();
+        }
+
+
+
+        // Para añadir una reparacion al historial 
+        public static int AddHistorial(Modelo.Historial reparacionAGuardar)
+        {
+            _contexto.Historials.Add(reparacionAGuardar);
             return _contexto.SaveChanges();
         }
     }

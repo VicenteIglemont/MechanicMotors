@@ -39,6 +39,7 @@ namespace Mechanic_Motors.Vista
             AlmacenDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetAlmacen();
             CitasDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetCitas();
             ConsultasDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetDudas();
+            HistorialDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetHistorial();
             FechaActualTextBlockMain.Text = $"{idioma.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek).ToUpper()}, {DateTime.Now.Day} de {DateTime.Now.ToString("MMMM").ToUpper()} de {DateTime.Now.Year}";
             HoraActualTextBlockMain.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
 
@@ -48,9 +49,6 @@ namespace Mechanic_Motors.Vista
             actualizarHora.Tick += ActualizarHora_Tick;
             actualizarHora.Start();
         }
-
-
-
 
 
         // //////////////////////////////////
@@ -262,18 +260,16 @@ namespace Mechanic_Motors.Vista
         private void EliminarPiezaButton_Click(object sender, RoutedEventArgs e)
         {
             Pieza piezaCancelada = AlmacenDataGrid.SelectedItem as Modelo.Pieza;
-
-            if(System.Windows.MessageBox.Show("¿Desea eliminar esta pieza?", "Eliminar Pieza", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            EliminarPiezaWindow eliminarPiezaWindow = new EliminarPiezaWindow(piezaCancelada);
+            eliminarPiezaWindow.Owner = this;
+            eliminarPiezaWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            eliminarPiezaWindow.ShowDialog();
+            while (eliminarPiezaWindow.IsActive)
             {
-                if(BDServicios.DeletePieza(piezaCancelada) == 1)
-                {
-                    System.Windows.MessageBox.Show("Pieza eliminada con éxito", "Eliminar pieza", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("No se ha podido eliminar la pieza... Compruebe su conexión a internet", "Eliminar pieza", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+
             }
+            AlmacenDataGrid.Items.Refresh();
+            
         }
 
         // Boton para proceder a la modificacion de una pieza
@@ -297,19 +293,15 @@ namespace Mechanic_Motors.Vista
         private void EliminarCitaButton_Click(object sender, RoutedEventArgs e)
         {
             Cita citaElegida = CitasDataGrid.SelectedItem as Modelo.Cita;
-
-            if (System.Windows.MessageBox.Show("¿Desea eliminar esta cita?", "Eliminar cita", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            EliminarCitaWindow eliminarCitaWindow = new EliminarCitaWindow(citaElegida);
+            eliminarCitaWindow.Owner = this;
+            eliminarCitaWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            eliminarCitaWindow.ShowDialog();
+            while (eliminarCitaWindow.IsActive)
             {
-                if (BDServicios.DeleteCita(citaElegida) == 1)
-                {
-                    System.Windows.MessageBox.Show("Cita eliminada con éxito", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("No se ha podido eliminar la cita... Compruebe su conexión a internet", "Eliminar cita", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
 
+            }
+            CitasDataGrid.DataContext = (DataContext as MenuPrincipalViewModel).GetCitas();
             CitasDataGrid.Items.Refresh();
         }
 
@@ -334,21 +326,17 @@ namespace Mechanic_Motors.Vista
         private void EliminarDudaButton_Click(object sender, RoutedEventArgs e)
         {
             Consulta consultaElegida = ConsultasDataGrid.SelectedItem as Modelo.Consulta;
-
-            if (System.Windows.MessageBox.Show("¿Desea eliminar esta consulta?", "Eliminar Consulta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            EliminarConsultaWindow eliminarConsultaWindow = new EliminarConsultaWindow(consultaElegida);
+            eliminarConsultaWindow.Owner = this;
+            eliminarConsultaWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            eliminarConsultaWindow.ShowDialog();
+            while (eliminarConsultaWindow.IsActive)
             {
-                if (BDServicios.DeleteConsulta(consultaElegida) == 1)
-                {
-                    System.Windows.MessageBox.Show("Consulta eliminada con éxito", "Eliminar Consulta", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ConsultasDataGrid.Items.Refresh();
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("No se ha podido eliminar la consulta... Compruebe su conexión a internet", "Eliminar Consulta", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+
             }
+            ConsultasDataGrid.Items.Refresh();
+
         }
 
-        
     }
 }

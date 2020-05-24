@@ -1,0 +1,48 @@
+﻿<Window x:Class="Mechanic_Motors.Vista.EliminarPiezaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mechanic_Motors.Vista"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Eliminar Pieza" Height="300" Width="550" WindowStyle="None">
+
+    <StackPanel>
+
+        <TextBlock Text="¿Quieres eliminar la siguiente pieza del registro de almacen?" Margin="0,30,0,0" HorizontalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <StackPanel Margin="10">
+                <TextBlock Text="Id Pieza"/>
+                <TextBlock Text="Nombre pieza"/>
+                <TextBlock Text="Vehículo perteneciente"/>
+                <TextBlock Text="Color"/>
+                <TextBlock Text="Precio"/>
+                <TextBlock Text="Cantidad"/>
+            </StackPanel>
+            <StackPanel Margin="10">
+                <TextBlock x:Name="IdPiezaTextBlock"/>
+                <TextBlock x:Name="NombrePiezaTextBlock"/>
+                <TextBlock x:Name="VehiculoTextBlock"/>
+                <TextBlock x:Name="ColorTextBlock"/>
+                <TextBlock x:Name="PrecioTextBlock"/>
+                <TextBlock x:Name="CantidadTextBlock"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button x:Name="NoButton" Content="No" Margin="5" Click="NoButton_Click" />
+            <Button x:Name="YesButton" Content="Si" Margin="5" Click="YesButton_Click" />
+        </StackPanel>
+        
+    </StackPanel>
+    
+</Window>
